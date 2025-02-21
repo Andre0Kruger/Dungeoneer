@@ -1,8 +1,4 @@
-
-
-
 class Timeout {
-
     constructor(connection) {
         this.ackRequested = false;
         this.POLL_SECONDS = 30;
@@ -19,9 +15,7 @@ class Timeout {
 
             cls.connection.send({ event: "ping" });
             cls.ackRequested = true;
-        }, this.POLL_SECONDS * 1000)
-
-
+        }, this.POLL_SECONDS * 1000);
     }
 
     destroy() {
@@ -29,7 +23,6 @@ class Timeout {
     }
 
     ack() {
-  
         this.ackRequested = false;
     }
 }

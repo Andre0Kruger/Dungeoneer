@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             function (err) {
                 console.error("Async: Could not copy text: ", err);
-            }
+            },
         );
     };
     document.querySelector("#qrCode").onclick = (e) => {
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 (err) => {
                     console.error("Could not copy qr code image: ", err);
-                }
+                },
             );
         });
     };
@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             function (err) {
                 console.error("Async: Could not copy text: ", err);
-            }
+            },
         );
     };
 });

@@ -1,6 +1,6 @@
 :root {
-    --basic-font: 'Roboto', sans-serif;
-    --header-font: 'Open Sans', sans-serif;
+    --basic-font: "Roboto", sans-serif;
+    --header-font: "Open Sans", sans-serif;
 }
 
 video {
@@ -9,16 +9,18 @@ video {
     height: auto !important;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-family: var(--header-font);
 }
 
 p {
     font-family: var(--basic-font);
 }
-.sharebar{
-
-   
+.sharebar {
     padding: 0.5em;
 }
 .link_base {
@@ -28,7 +30,7 @@ p {
     display: block;
     background-size: 95%;
     margin: 0.25em;
-    margin-top:0.5em;
+    margin-top: 0.5em;
 }
 
 .reddit_link {
@@ -36,7 +38,7 @@ p {
     background-image: url("img/link/reddit.png");
 }
 
-.github_link{
+.github_link {
     background-image: url("img/link/github.png");
 }
 
@@ -56,11 +58,11 @@ main {
     background-repeat: no-repeat;
     background-size: contain;
 }
-.title_card h1{
+.title_card h1 {
     margin-bottom: 0.5em;
 }
-.title_card p{
-    margin:0;
+.title_card p {
+    margin: 0;
 }
 .title_card {
     position: absolute;
@@ -74,7 +76,7 @@ main {
 }
 
 @media (max-width: 600px) {
-    .cover_img{
+    .cover_img {
         background-size: 778px;
     }
     .card {
@@ -87,7 +89,7 @@ main {
 }
 
 @media (min-width: 601px) {
-    .cover_img{
+    .cover_img {
         background-size: 920px;
     }
     .card {
@@ -99,7 +101,7 @@ main {
         top: 45%;
         right: 0;
         border-top-left-radius: 5px;
-        border-bottom-left-radius:5px;
+        border-bottom-left-radius: 5px;
     }
 }
 
@@ -107,11 +109,10 @@ main {
     height: 100vh;
 
     margin: 0;
-    
 
     background-repeat: no-repeat;
     background-position-x: center;
-    background-position-y:top;
+    background-position-y: top;
     padding: 0;
     background-image: url(img/dungeoneer.JPG);
 }
@@ -175,7 +176,6 @@ body {
 
 .green {
     background-color: #093509;
-    ;
 }
 
 .download_button {
@@ -187,7 +187,6 @@ body {
 }
 
 a {
-  
     color: white;
 }
 

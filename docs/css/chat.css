@@ -15,8 +15,8 @@
     padding: 0.5em;
 }
 
-.chat-container-messages{
-    overflow-x:scroll;
+.chat-container-messages {
+    overflow-x: scroll;
 }
 
 .chat-message,

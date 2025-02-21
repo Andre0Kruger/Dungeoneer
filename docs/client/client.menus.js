@@ -1,6 +1,5 @@
 var menu = (function () {
     function initialize() {
-       
         var toolbarState = localStorage.getItem("toolbar-toggle-state");
         if (!toolbarState) return;
         var collapsed = document.querySelector(".toolbar").classList.contains("toolbar_collapsed");

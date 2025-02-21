@@ -39,7 +39,7 @@ let measurements = (function () {
         var clientX = eventX(event);
         var clientY = eventY(event);
         measurementsLayerContext.moveTo(clientX * DEVICE_SCALE, clientY * DEVICE_SCALE);
-        console.log("Measurements mouse down")
+        console.log("Measurements mouse down");
         document.onmousedown = measurementMouseDownHandler;
 
         if (measurementTargetOrigin == null) {
@@ -56,15 +56,7 @@ let measurements = (function () {
                 if (event.button == 0) {
                     if (event.ctrlKey) {
                         if (lastMeasuredLineDrawn) {
-                            totalMeasuredDistance += Math.round(
-                                (Math.sqrt(
-                                    Math.pow(lastMeasuredLineDrawn.a.x - lastMeasuredLineDrawn.b.x, 2) +
-                                        Math.pow(lastMeasuredLineDrawn.a.y - lastMeasuredLineDrawn.b.y, 2) +
-                                        Math.pow(lastMeasuredLineDrawn.a.z - lastMeasuredLineDrawn.b.z, 2)
-                                ) /
-                                    cellSize) *
-                                    UNITS_PER_GRID
-                            );
+                            totalMeasuredDistance += Math.round((Math.sqrt(Math.pow(lastMeasuredLineDrawn.a.x - lastMeasuredLineDrawn.b.x, 2) + Math.pow(lastMeasuredLineDrawn.a.y - lastMeasuredLineDrawn.b.y, 2) + Math.pow(lastMeasuredLineDrawn.a.z - lastMeasuredLineDrawn.b.z, 2)) / cellSize) * UNITS_PER_GRID);
                         }
                         lastMeasuredLineDrawn = null;
                     } else {
@@ -235,12 +227,7 @@ let measurements = (function () {
                 if (lastMeasuredCube) {
                     measurements.eraseModeOn();
                     measurementsLayerContext.beginPath();
-                    measurementsLayerContext.rect(
-                        (lastMeasuredCube.x - lastMeasuredCube.radius) * DEVICE_SCALE,
-                        (lastMeasuredCube.y - lastMeasuredCube.radius) * DEVICE_SCALE,
-                        lastMeasuredCube.radius * 2 * DEVICE_SCALE,
-                        lastMeasuredCube.radius * 2 * DEVICE_SCALE
-                    );
+                    measurementsLayerContext.rect((lastMeasuredCube.x - lastMeasuredCube.radius) * DEVICE_SCALE, (lastMeasuredCube.y - lastMeasuredCube.radius) * DEVICE_SCALE, lastMeasuredCube.radius * 2 * DEVICE_SCALE, lastMeasuredCube.radius * 2 * DEVICE_SCALE);
                     measurementsLayerContext.stroke();
                     measurementsLayerContext.fill();
                     measurements.eraseModeOff();
@@ -250,12 +237,7 @@ let measurements = (function () {
                 var radius = Math.sqrt(Math.pow(clientX - measurementOriginPosition.x, 2) + Math.pow(clientY - measurementOriginPosition.y, 2));
                 measurementsLayerContext.beginPath();
                 measurementsLayerContext.moveTo((measurementOriginPosition.x - radius) * DEVICE_SCALE, (measurementOriginPosition.y - radius) * DEVICE_SCALE);
-                measurementsLayerContext.rect(
-                    (measurementOriginPosition.x - radius) * DEVICE_SCALE,
-                    (measurementOriginPosition.y - radius) * DEVICE_SCALE,
-                    radius * 2 * DEVICE_SCALE,
-                    radius * 2 * DEVICE_SCALE
-                );
+                measurementsLayerContext.rect((measurementOriginPosition.x - radius) * DEVICE_SCALE, (measurementOriginPosition.y - radius) * DEVICE_SCALE, radius * 2 * DEVICE_SCALE, radius * 2 * DEVICE_SCALE);
                 measurementsLayerContext.stroke();
                 measurementsLayerContext.fill();
                 showToolTip(event, `${Math.round((radius / cellSize) * UNITS_PER_GRID) * 2} ${MAP_UNIT}`, "tooltip");
@@ -274,13 +256,7 @@ let measurements = (function () {
                 if (lastMeasuredSphere) {
                     measurements.eraseModeOn();
                     measurementsLayerContext.beginPath();
-                    measurementsLayerContext.arc(
-                        lastMeasuredSphere.x * DEVICE_SCALE,
-                        lastMeasuredSphere.y * DEVICE_SCALE,
-                        (lastMeasuredSphere.radius + 40) * DEVICE_SCALE,
-                        0,
-                        2 * Math.PI * DEVICE_SCALE
-                    );
+                    measurementsLayerContext.arc(lastMeasuredSphere.x * DEVICE_SCALE, lastMeasuredSphere.y * DEVICE_SCALE, (lastMeasuredSphere.radius + 40) * DEVICE_SCALE, 0, 2 * Math.PI * DEVICE_SCALE);
                     measurementsLayerContext.stroke();
                     measurementsLayerContext.fill();
                     measurements.eraseModeOff();
@@ -309,12 +285,7 @@ let measurements = (function () {
                 if (lastMeasuredCone) {
                     measurements.eraseModeOn();
                     measurementsLayerContext.beginPath();
-                    measurementsLayerContext.rect(
-                        (lastMeasuredCone.x - lastMeasuredCone.radius) * DEVICE_SCALE,
-                        (lastMeasuredCone.y - lastMeasuredCone.radius) * DEVICE_SCALE,
-                        lastMeasuredCone.radius * 2 * DEVICE_SCALE,
-                        lastMeasuredCone.radius * 2 * DEVICE_SCALE
-                    );
+                    measurementsLayerContext.rect((lastMeasuredCone.x - lastMeasuredCone.radius) * DEVICE_SCALE, (lastMeasuredCone.y - lastMeasuredCone.radius) * DEVICE_SCALE, lastMeasuredCone.radius * 2 * DEVICE_SCALE, lastMeasuredCone.radius * 2 * DEVICE_SCALE);
                     measurementsLayerContext.stroke();
                     measurementsLayerContext.fill();
                     measurements.eraseModeOff();
@@ -323,7 +294,10 @@ let measurements = (function () {
                 }
                 measurementsLayerContext.beginPath();
                 measurementsLayerContext.moveTo(measurementOriginPosition.x * DEVICE_SCALE, measurementOriginPosition.y * DEVICE_SCALE);
-                var newPoint = Geometry.rotate(0.46355945, measurementOriginPosition, { x: clientX, y: clientY });
+                var newPoint = Geometry.rotate(0.46355945, measurementOriginPosition, {
+                    x: clientX,
+                    y: clientY,
+                });
                 var newPoint2 = Geometry.rotate(-0.46355944999997217, measurementOriginPosition, { x: clientX, y: clientY });
 
                 var midPoint = {
@@ -337,11 +311,7 @@ let measurements = (function () {
                 measurementsLayerContext.stroke();
                 measurementsLayerContext.fill();
 
-                showToolTip(
-                    event,
-                    Math.round((Math.sqrt(Math.pow(midPoint.x - measurementOriginPosition.x, 2) + Math.pow(midPoint.y - measurementOriginPosition.y, 2)) / cellSize) * UNITS_PER_GRID) + ` ${MAP_UNIT}`,
-                    "tooltip"
-                );
+                showToolTip(event, Math.round((Math.sqrt(Math.pow(midPoint.x - measurementOriginPosition.x, 2) + Math.pow(midPoint.y - measurementOriginPosition.y, 2)) / cellSize) * UNITS_PER_GRID) + ` ${MAP_UNIT}`, "tooltip");
 
                 lastMeasuredCone.x = measurementOriginPosition.x;
                 lastMeasuredCone.y = measurementOriginPosition.y;
@@ -359,16 +329,7 @@ let measurements = (function () {
                 //cone
                 pawnsInArea = [...pawns.all].filter((pawn) => {
                     var pawnCenter = getPawnOrigin(pawn);
-                    return Geometry.insideCone(
-                        lastMeasuredCone.x,
-                        lastMeasuredCone.y,
-                        lastMeasuredCone.newPoint.x,
-                        lastMeasuredCone.newPoint.y,
-                        lastMeasuredCone.newPoint2.x,
-                        lastMeasuredCone.newPoint2.y,
-                        pawnCenter.x,
-                        pawnCenter.y
-                    );
+                    return Geometry.insideCone(lastMeasuredCone.x, lastMeasuredCone.y, lastMeasuredCone.newPoint.x, lastMeasuredCone.newPoint.y, lastMeasuredCone.newPoint2.x, lastMeasuredCone.newPoint2.y, pawnCenter.x, pawnCenter.y);
                 });
             } else if (toolbox[2] && lastMeasuredSphere) {
                 //sphere
@@ -385,7 +346,7 @@ let measurements = (function () {
                             {
                                 x: lastMeasuredSphere.x,
                                 y: lastMeasuredSphere.y,
-                            }
+                            },
                         ) <= lastMeasuredSphere.radius
                     );
                 });
@@ -403,14 +364,7 @@ let measurements = (function () {
 
                 pawnsInArea = [...pawns.all].filter((pawn) => {
                     var pawnCenter = getPawnOrigin(pawn);
-                    return Geometry.insideRect(
-                        measureRectangle.x,
-                        measureRectangle.y,
-                        measureRectangle.x + measureRectangle.width,
-                        measureRectangle.y + measureRectangle.height,
-                        pawnCenter.x,
-                        pawnCenter.y
-                    );
+                    return Geometry.insideRect(measureRectangle.x, measureRectangle.y, measureRectangle.x + measureRectangle.width, measureRectangle.y + measureRectangle.height, pawnCenter.x, pawnCenter.y);
                 });
             } else {
                 return;
@@ -439,7 +393,6 @@ let measurements = (function () {
         }
 
         function measurementMouseDownHandler(event) {
-            
             if (event.button == 0 && event.ctrlKey) {
                 if (toolbox[2]) {
                     if (measurementFillStylePath == null || measurementFillStylePath == "") return;

@@ -31,7 +31,7 @@ class Chat {
         messages.forEach((message) => {
             this.chatContainer.querySelector(".chat-container-messages").appendChild(this.createChatMessage(message));
         });
-        
+
         messageCont.scrollTop = messageCont.scrollHeight;
     }
     createChatMessage(message) {
@@ -43,7 +43,7 @@ class Chat {
         return cont;
     }
     createButton() {
-        if(document.getElementById("chat-button"))return;
+        if (document.getElementById("chat-button")) return;
         var btn = Util.ele("button", "button_style chat-button toggle_button ");
         btn.id = "chat-button";
         this.buttonContainer.appendChild(btn);

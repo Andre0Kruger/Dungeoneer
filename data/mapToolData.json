@@ -1,70 +1,50 @@
 {
     "effects": [
-      
         {
             "name": "Fog",
-            "classes": [
-                "fog"
-            ],
+            "classes": ["fog"],
             "filePaths": [],
             "isLightEffect": false
         },
         {
             "name": "Smoke",
-            "classes": [
-                "smoke"
-            ],
+            "classes": ["smoke"],
             "filePaths": [],
             "isLightEffect": false
         },
         {
             "name": "Poison cloud",
-            "classes": [
-                "poisonCloud"
-            ],
+            "classes": ["poisonCloud"],
             "filePaths": [],
             "isLightEffect": false
         },
         {
             "name": "Chromatic light",
-            "classes": [
-                "chromatic_orb"
-            ],
+            "classes": ["chromatic_orb"],
             "filePaths": [],
             "isLightEffect": true
         },
         {
             "name": "Azure light",
-            "classes": [
-                "azure_orb",
-                "azure_light"
-            ],
+            "classes": ["azure_orb", "azure_light"],
             "filePaths": [],
             "isLightEffect": true
         },
         {
             "name": "Emerald light",
-            "classes": [
-                "emerald_orb",
-                "emerald_light"
-            ],
+            "classes": ["emerald_orb", "emerald_light"],
             "filePaths": [],
             "isLightEffect": true
         },
         {
             "name": "Maroon light",
-            "classes": [
-                "maroon_orb",
-                "maroon_light"
-            ],
+            "classes": ["maroon_orb", "maroon_light"],
             "filePaths": [],
             "isLightEffect": true
         },
         {
             "name": "Torch",
-            "classes": [
-                "light_effect_torch"
-            ],
+            "classes": ["light_effect_torch"],
             "filePaths": [],
             "isLightEffect": true
         }

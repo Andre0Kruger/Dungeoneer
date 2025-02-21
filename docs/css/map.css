@@ -50,8 +50,7 @@ html {
     position: absolute;
 }
 
-@media(max-width:650px) {
-
+@media (max-width: 650px) {
     #add_things_button,
     #visiblity_tool,
     .help_button,
@@ -116,32 +115,31 @@ body {
     background-color: transparent;
 }
 
-
 #line_tool,
 #line_fov_tool {
-    background-image: url('../css/img/line.png');
+    background-image: url("../css/img/line.png");
     background-position: 0 2px;
 }
 
 #cone_tool {
-    background-image: url('../css/img/cone.png');
+    background-image: url("../css/img/cone.png");
     background-position: 0 2px;
 }
 
 #cube_tool {
-    background-image: url('../css/img/cube.png');
+    background-image: url("../css/img/cube.png");
     background-position: 0 2px;
 }
 
 #sphere_tool,
 #sphere_fov_tool {
-    background-image: url('../css/img/sphere.png');
+    background-image: url("../css/img/sphere.png");
     background-position: 0 2px;
 }
 
 #rect_tool,
 #rect_fov_tool {
-    background-image: url('../css/img/rect.png');
+    background-image: url("../css/img/rect.png");
     background-position: -1px 0;
 }
 
@@ -167,7 +165,7 @@ li {
     font-size: 16px;
 }
 
-.popup_dialog>* {
+.popup_dialog > * {
     font-size: 1em;
     height: 2em;
     border-radius: 0;
@@ -175,12 +173,12 @@ li {
     padding: 0.25em;
 }
 
-.popup_dialog>label {
+.popup_dialog > label {
     padding: 5px;
     text-align: center;
 }
 
-.popup_dialog>input[type=color] {
+.popup_dialog > input[type="color"] {
     width: 100%;
     padding: 0;
 }
@@ -198,7 +196,7 @@ li {
     line-height: 1.44;
 }
 
-.toolbar>.toolbox_button {
+.toolbar > .toolbox_button {
     background-size: contain;
     background-repeat: no-repeat;
     width: 30px;
@@ -206,10 +204,10 @@ li {
     margin: 3px;
 }
 
-.toolbar>label,
-.toolbar>button,
-.toolbar>select,
-.toolbar>div>button {
+.toolbar > label,
+.toolbar > button,
+.toolbar > select,
+.toolbar > div > button {
     font-size: 14px;
     width: 50px;
     text-align: center;
@@ -218,13 +216,13 @@ li {
     line-height: 1.6em;
 }
 
-.toolbar>.button_style,
-.toolbar>div>.button_style,
-.toolbar>select {
+.toolbar > .button_style,
+.toolbar > div > .button_style,
+.toolbar > select {
     border: none;
 }
 
-.toolbar>select {
+.toolbar > select {
     -webkit-appearance: none;
 }
 
@@ -241,7 +239,7 @@ li {
 .global_listener_position_icon {
     width: 2em;
     height: 2em;
-    background-image: url('../css/img/listener.png');
+    background-image: url("../css/img/listener.png");
     background-size: contain;
 }
 
@@ -394,8 +392,6 @@ li {
     border: none !important;
 }
 
-
-
 .pawn {
     position: absolute;
     z-index: var(--z-index-pawn);
@@ -433,7 +429,6 @@ li {
     background-repeat: no-repeat;
 }
 
-
 .mob_token_dead::after {
     content: "Dead";
     width: 100%;
@@ -467,12 +462,12 @@ li {
     height: 100%;
 }
 
-.pawn[data-token-dead=true] {
+.pawn[data-token-dead="true"] {
     background-color: rgba(218, 0, 0, 0.632) !important;
     background-image: url("tokens/dead.png");
 }
 
-.pawn>.token_photo {
+.pawn > .token_photo {
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -484,7 +479,7 @@ li {
     transform: rotate(calc(var(--pawn-rotate))) scale(var(--pawn-image-scale));
 }
 
-.pawn>.mob_token_container {
+.pawn > .mob_token_container {
     width: 100%;
     height: 100%;
     pointer-events: none;
@@ -550,7 +545,7 @@ li {
     z-index: 6;
 }
 
-.condition_effect>p {
+.condition_effect > p {
     margin: auto;
     font-size: 0.5vw;
 }
@@ -574,7 +569,7 @@ li {
     display: block;
 }
 
-#conditions_menu>button {
+#conditions_menu > button {
     font-size: 12px;
 }
 
@@ -588,10 +583,9 @@ li {
     max-height: 500px;
 }
 
-.pawn_small>.token_photo {
+.pawn_small > .token_photo {
     background-size: 70%;
 }
-
 
 .pawn_accessed:hover,
 .pawn_selected {

@@ -115,7 +115,7 @@
         "damageType": "slashing",
         "reach": "10",
         "heavy": true,
-        "twoHanded":true,
+        "twoHanded": true,
         "martial": true
     },
     {

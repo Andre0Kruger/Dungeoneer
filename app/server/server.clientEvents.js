@@ -34,16 +34,38 @@ const CLIENT_EVENT_HANLDERS = {
         if (peer.partyAccess.length == 1) {
             data = data.data;
             console.log(data);
-            notifyMaptool({ event: "talk-bubble", elementId: peer.partyAccess[0].element_id, text: data.text });
-            echoToPeers({ event: "chat-message", data: { name: peer.partyAccess[0].character_name, elementId: peer.partyAccess[0].element_id, text: data.text } });
+            notifyMaptool({
+                event: "talk-bubble",
+                elementId: peer.partyAccess[0].element_id,
+                text: data.text,
+            });
+            echoToPeers({
+                event: "chat-message",
+                data: {
+                    name: peer.partyAccess[0].character_name,
+                    elementId: peer.partyAccess[0].element_id,
+                    text: data.text,
+                },
+            });
         }
     },
     "roll-dice": function (data, connection, peer) {
         var result = diceRoller.rollFromString(data.diceString);
         appendServerLog(`${peer.name} rolled ${data.diceString}: ${result}`, SERVER_EVENTS.MOVE);
         if (peer.partyAccess.length == 1) {
-            notifyMaptool({ event: "talk-bubble", elementId: peer.partyAccess[0].element_id, text: `${data.diceString}: ${result}` });
-            echoToPeers({ event: "chat-message", data: { name: peer.partyAccess[0].character_name, elementId: peer.partyAccess[0].element_id, text: `${data.diceString}: ${result}` } });
+            notifyMaptool({
+                event: "talk-bubble",
+                elementId: peer.partyAccess[0].element_id,
+                text: `${data.diceString}: ${result}`,
+            });
+            echoToPeers({
+                event: "chat-message",
+                data: {
+                    name: peer.partyAccess[0].character_name,
+                    elementId: peer.partyAccess[0].element_id,
+                    text: `${data.diceString}: ${result}`,
+                },
+            });
         }
 
         return connection.send({

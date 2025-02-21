@@ -1,19 +1,7 @@
 {
     "currencies": {
-        "coins": [
-            "cp",
-            "sp",
-            "ep",
-            "gp",
-            "pp"
-        ],
-        "conversions": [
-            10,
-            5,
-            2,
-            10,
-            0
-        ]
+        "coins": ["cp", "sp", "ep", "gp", "pp"],
+        "conversions": [10, 5, 2, 10, 0]
     },
     "colorPalette": [
         "rgba(0, 100, 0,0.47)",
@@ -45,28 +33,8 @@
         "rgba(64, 64, 0,0.47)"
     ],
     "creaturePossibleSizes": {
-        "hexes": [
-            0.5,
-            0.75,
-            1,
-            2,
-            3,
-            4,
-            6,
-            8,
-            14
-        ],
-        "sizes": [
-            "tiny",
-            "small",
-            "medium",
-            "large",
-            "huge",
-            "gargantuan",
-            "colossal",
-            "colossal+",
-            "titanic"
-        ]
+        "hexes": [0.5, 0.75, 1, 2, 3, 4, 6, 8, 14],
+        "sizes": ["tiny", "small", "medium", "large", "huge", "gargantuan", "colossal", "colossal+", "titanic"]
     },
     "creatureWounds": [
         {
@@ -85,24 +53,8 @@
             "className": "pawn_wound_bloodied"
         }
     ],
-    "dicePossibleSides": [
-        100,
-        20,
-        12,
-        10,
-        8,
-        6,
-        4,
-        2
-    ],
-    "itemRarityValues": [
-        "Common",
-        "Uncommon",
-        "Rare",
-        "Very rare",
-        "Legendary",
-        "Artifact"
-    ],
+    "dicePossibleSides": [100, 20, 12, 10, 8, 6, 4, 2],
+    "itemRarityValues": ["Common", "Uncommon", "Rare", "Very rare", "Legendary", "Artifact"],
     "armorTypes": [
         {
             "type": "natural armor",
@@ -195,51 +147,9 @@
             "ddb_name": "padded"
         }
     ],
-    "itemTypeValues": [
-        "Weapon",
-        "Wand",
-        "Armor",
-        "Wondrous item",
-        "Potion",
-        "Scroll",
-        "Staff",
-        "Rod",
-        "Shield",
-        "Ring",
-        "Ammunition",
-        "Tattoo"
-    ],
-    "classes": [
-        "Artificer",
-        "Bard",
-        "Barbarian",
-        "Cleric",
-        "Druid",
-        "Fighter",
-        "Monk",
-        "Paladin",
-        "Ranger",
-        "Rogue",
-        "Sorcerer",
-        "Wizard",
-        "Warlock"
-    ],
-    "defaultCreatureTypes": [
-        "Plant",
-        "Beast",
-        "Fiend",
-        "Fey",
-        "Celestial",
-        "Undead",
-        "Construct",
-        "Aberration",
-        "Dragon",
-        "Elemental",
-        "Giant",
-        "Humanoid",
-        "Monstrosity",
-        "Ooze"
-    ],
+    "itemTypeValues": ["Weapon", "Wand", "Armor", "Wondrous item", "Potion", "Scroll", "Staff", "Rod", "Shield", "Ring", "Ammunition", "Tattoo"],
+    "classes": ["Artificer", "Bard", "Barbarian", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Wizard", "Warlock"],
+    "defaultCreatureTypes": ["Plant", "Beast", "Fiend", "Fey", "Celestial", "Undead", "Construct", "Aberration", "Dragon", "Elemental", "Giant", "Humanoid", "Monstrosity", "Ooze"],
     "defaultCreatureAlignments": [
         "Lawful evil",
         "Any alignment",
@@ -259,31 +169,11 @@
         "Any evil alignment"
     ],
     "defaultCreatureSubTypes": {
-        "aberration": [
-            "Shapechanger"
-        ],
-        "celestial": [
-            "Angel",
-            "Titan"
-        ],
-        "fey": [
-            "Elf",
-            "Eladrin"
-        ],
-        "fiend": [
-            "Demon",
-            "Devil",
-            "Yugoloth",
-            "Shapechanger"
-        ],
-        "giant": [
-            "Cloud Giant",
-            "Fire Giant",
-            "Frost Giant",
-            "Stone Giant",
-            "Hill Giant",
-            "Storm Giant"
-        ],
+        "aberration": ["Shapechanger"],
+        "celestial": ["Angel", "Titan"],
+        "fey": ["Elf", "Eladrin"],
+        "fiend": ["Demon", "Devil", "Yugoloth", "Shapechanger"],
+        "giant": ["Cloud Giant", "Fire Giant", "Frost Giant", "Stone Giant", "Hill Giant", "Storm Giant"],
         "humanoid": [
             "Aarakocra",
             "Any race",
@@ -323,62 +213,14 @@
             "Xvart",
             "Yuan-ti"
         ],
-        "monstrosity": [
-            "Shapechanger",
-            "Titan"
-        ],
-        "undead": [
-            "Shapechanger",
-            "Titan"
-        ]
+        "monstrosity": ["Shapechanger", "Titan"],
+        "undead": ["Shapechanger", "Titan"]
     },
-    "spellSchools": [
-        "Abjuration",
-        "Conjuration",
-        "Divination",
-        "Enchantment",
-        "Evocation",
-        "Illusion",
-        "Necromancy",
-        "Transmutation"
-    ],
+    "spellSchools": ["Abjuration", "Conjuration", "Divination", "Enchantment", "Evocation", "Illusion", "Necromancy", "Transmutation"],
     "scrollLevels": [
-        [
-            "Common",
-            "Common",
-            "Uncommon",
-            "Uncommon",
-            "Rare",
-            "Rare",
-            "Very rare",
-            "Very rare",
-            "Very rare",
-            "Legendary"
-        ],
-        [
-            "13",
-            "13",
-            "13",
-            "15",
-            "15",
-            "17",
-            "17",
-            "18",
-            "18",
-            "19"
-        ],
-        [
-            "+5",
-            "+5",
-            "+5",
-            "+7",
-            "+7",
-            "+9",
-            "+9",
-            "+10",
-            "+10",
-            "+11"
-        ]
+        ["Common", "Common", "Uncommon", "Uncommon", "Rare", "Rare", "Very rare", "Very rare", "Very rare", "Legendary"],
+        ["13", "13", "13", "15", "15", "17", "17", "18", "18", "19"],
+        ["+5", "+5", "+5", "+7", "+7", "+9", "+9", "+10", "+10", "+11"]
     ],
     "skills": [
         "Athletics",
@@ -919,14 +761,7 @@
             ]
         }
     ],
-    "ability_scores": [
-        "Strength",
-        "Dexterity",
-        "Constitution",
-        "Intelligence",
-        "Wisdom",
-        "Charisma"
-    ],
+    "ability_scores": ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"],
     "prof_bonus": [
         {
             "bonus": 2

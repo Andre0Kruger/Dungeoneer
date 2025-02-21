@@ -110,7 +110,7 @@ const diceRollerBar = (function () {
                     saveDiceFormula(value);
                 }
             },
-            { placeholder: "Dice to roll (Ex. 2d6+3)" }
+            { placeholder: "Dice to roll (Ex. 2d6+3)" },
         );
         var okRow = prompt.querySelector(".modal_ok_row");
         okRow.prepend(saveFormulaInput);

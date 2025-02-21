@@ -11,7 +11,7 @@ main {
 
 body {
     --main-text-color: #ffffff;
-    background-image: url('./bg.jpg') !important
+    background-image: url("./bg.jpg") !important;
 }
 
 button,
@@ -21,7 +21,7 @@ p,
     -webkit-app-region: no-drag;
 }
 
-#server_info_container>input {
+#server_info_container > input {
     margin: 0.25em 1em;
 }
 
@@ -37,8 +37,6 @@ p,
 #qrcode {
     display: flex;
     justify-content: center;
-    
-
 }
 
 .peer_node {
@@ -56,11 +54,11 @@ p,
     background-color: var(--main-success-color-lighter);
 }
 
-.peer_node .container_for_checkbox:hover input~.checkmark {
+.peer_node .container_for_checkbox:hover input ~ .checkmark {
     background-color: var(--main-success-color-lighter);
 }
 
-.peer_node .container_for_checkbox input:checked~.checkmark {
+.peer_node .container_for_checkbox input:checked ~ .checkmark {
     background-color: var(--main-success-color-lighter);
 }
 
@@ -93,8 +91,6 @@ p,
 
 .server_id {
     cursor: pointer;
-
-
 }
 
 input {
@@ -113,7 +109,6 @@ input {
 
 .server_activity_log_timestamp {
     margin: 0 1em 0 0;
-
 }
 
 .server_activity_log_entry {

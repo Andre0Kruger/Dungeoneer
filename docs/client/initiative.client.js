@@ -1,12 +1,13 @@
 const Modals = require("./modals");
 
-var initiative = function () {
+var initiative = (function () {
     var roundTimer;
     var order;
     var currentNode;
-    var monsterColor = "rgb(197, 0, 0)", playerColor = "rgb(101, 117, 197)", defaultPlayerColor = "#000000";
+    var monsterColor = "rgb(197, 0, 0)",
+        playerColor = "rgb(101, 117, 197)",
+        defaultPlayerColor = "#000000";
     var roundCounter;
-
 
     function emptyInitiative() {
         var bar = document.getElementById("initBar");
@@ -26,8 +27,7 @@ var initiative = function () {
         emptyInitiative();
 
         document.getElementById("initiative_control_bar").classList.add("hidden");
-        document.querySelector(".roundcounter__value").innerHTML = ("1");
-
+        document.querySelector(".roundcounter__value").innerHTML = "1";
     }
     function sortAndDisplay() {
         document.querySelector("#initiative_popup_window")?.classList.add("hidden");
@@ -43,12 +43,11 @@ var initiative = function () {
         for (var j = 0; j < order.length; j++) {
             bar.appendChild(createNode(order[j]));
         }
-
     }
-   
+
     function createNode(entry) {
         var newNode = Util.ele("div", "initiativeNode initiative_node_inactive init--PC");
-        var p = Util.ele("p", "initiative_name_node", entry.name)
+        var p = Util.ele("p", "initiative_name_node", entry.name);
         newNode.appendChild(p);
         if (entry.isPlayer) {
             newNode.classList.add("player_node");
@@ -60,16 +59,14 @@ var initiative = function () {
         newNode.style.backgroundColor = getColor(entry);
         return newNode;
     }
-    
-    function getColor(entry) {
 
+    function getColor(entry) {
         if (entry.color) return Util.hexToHSL(entry.color, 40);
         if (entry.isPlayer) return playerColor;
         return monsterColor;
     }
 
     function getNextRoundCounterValue() {
-
         var max = order.length;
 
         if (roundCounter[1] >= max) {
@@ -78,26 +75,23 @@ var initiative = function () {
             } else if (roundCounter[1] <= 1 && roundCounter[0] != 1) {
                 return max;
             }
-
         }
         return roundCounter[1] + 1;
     }
 
     /**
-     * Moves the current active node in Initiative nodes, sign 
-     * for whos turn it is. 
-     * @param {*Direction; back in a round or forward} sign 
+     * Moves the current active node in Initiative nodes, sign
+     * for whos turn it is.
+     * @param {*Direction; back in a round or forward} sign
      */
     function nextRound(sign) {
-        if (!roundCounter)
-            return;
+        if (!roundCounter) return;
 
-        if (roundCounter[0] == 1 && roundCounter[1] == 1 && sign < 0)
-            return false;
+        if (roundCounter[0] == 1 && roundCounter[1] == 1 && sign < 0) return false;
 
         var initNodes = [...document.querySelectorAll(".initiativeNode")];
         var max = initNodes.length;
-        if (roundCounter[1] >= max && sign > 0 || roundCounter[1] <= 1 && sign < 0) {
+        if ((roundCounter[1] >= max && sign > 0) || (roundCounter[1] <= 1 && sign < 0)) {
             if (roundCounter[1] >= max) {
                 roundCounter[1] = 1;
             } else if (roundCounter[1] <= 1 && roundCounter[0] != 1) {
@@ -105,11 +99,9 @@ var initiative = function () {
             }
             roundCounter[0] += 1 * sign;
             var roundCounterEle = document.querySelector(".roundcounter__value");
-            if (roundCounterEle)
-                roundCounterEle.innerHTML = (roundCounter[0]);
+            if (roundCounterEle) roundCounterEle.innerHTML = roundCounter[0];
         } else {
             roundCounter[1] += 1 * sign;
-
         }
 
         var currentInitActor = currentActor();
@@ -120,25 +112,22 @@ var initiative = function () {
             currentActorEle.style.color = currentInitActor.current.color;
         }
 
-        initNodes.forEach(node => {
+        initNodes.forEach((node) => {
             node.classList.remove("initiative_node_active");
             node.classList.add("initiative_node_inactive");
-        })
+        });
 
         var currentNode = document.querySelector(".initiativeNode:nth-child(" + roundCounter[1] + ")");
         if (currentNode) {
-            currentNode.classList.add("initiative_node_active")
-            currentNode.classList.remove("initiative_node_inactive")
+            currentNode.classList.add("initiative_node_active");
+            currentNode.classList.remove("initiative_node_inactive");
 
             var current = order[roundCounter[1] - 1];
 
             if (currentNode.classList.contains("initiative_node_action_readied")) {
                 currentNode.classList.remove("initiative_node_action_readied");
             }
-
         }
-
-
 
         return current;
     }
@@ -148,20 +137,17 @@ var initiative = function () {
         nextRound(0);
     }
 
-
-
     function getOrder() {
         return order;
     }
 
     function setOrder(orderArr) {
-        console.log("Set order", orderArr)
+        console.log("Set order", orderArr);
         order = orderArr;
         sort();
         sortAndDisplay();
         nextRound(0);
     }
-
 
     function sort() {
         order.sort(function (a, b) {
@@ -171,20 +157,19 @@ var initiative = function () {
                 return b.roll - a.roll;
             }
         });
-
     }
     var callBackArr = [];
     function addEventListener(callback) {
         callBackArr.push(callback);
     }
     function publishEvent(arg) {
-        callBackArr.forEach(callback => {
-            callback(arg)
+        callBackArr.forEach((callback) => {
+            callback(arg);
         });
     }
 
     function currentActor() {
-        console.log(roundCounter)
+        console.log(roundCounter);
         var current = order[roundCounter[1] - 1].name;
 
         if (current == null) {
@@ -206,10 +191,8 @@ var initiative = function () {
         hide: hide,
         empty: emptyInitiative,
         setRoundCounter: setRoundCounter,
-        currentActor: currentActor
-    }
-
-}();
-
+        currentActor: currentActor,
+    };
+})();
 
 module.exports = initiative;

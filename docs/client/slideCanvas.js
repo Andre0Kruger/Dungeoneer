@@ -1,5 +1,3 @@
-
-
 class SlideCanvas {
     constructor(canvas, menuId, onSlideChanged) {
         this.slideCanvas = canvas;
@@ -17,7 +15,6 @@ class SlideCanvas {
         this.bobAnimation = null;
         this.bobAnimationFrame = null;
         this.onSlideChanged = onSlideChanged;
-
     }
 
     saveSlideState(saveObject) {
@@ -30,7 +27,6 @@ class SlideCanvas {
     }
 
     toggleBackgroundSlide(button) {
-
         if (button.getAttribute("toggled") == "true") {
             this.setBackgroundSlide(null);
         } else {
@@ -39,17 +35,15 @@ class SlideCanvas {
     }
 
     notifyChanges() {
-        if (this.onSlideChanged){
-            var obj ={};
+        if (this.onSlideChanged) {
+            var obj = {};
             this.saveSlideState(obj);
             this.onSlideChanged(obj);
         }
-         
     }
     setBackgroundSlide(animation) {
-
         var _this = this;
-        this.styleClasses.forEach(cls => _this.slideCanvas.classList.remove(cls));
+        this.styleClasses.forEach((cls) => _this.slideCanvas.classList.remove(cls));
         var cls;
         this.currentAnimation = animation;
         this.notifyChanges();
@@ -63,10 +57,8 @@ class SlideCanvas {
                 return;
             }
         }
-        if (!this.slideCanvas.style.backgroundPositionX)
-            this.slideCanvas.style.backgroundPositionX = "0";
-        if (!this.slideCanvas.style.backgroundPositionY)
-            this.slideCanvas.style.backgroundPositionY = "0";
+        if (!this.slideCanvas.style.backgroundPositionX) this.slideCanvas.style.backgroundPositionX = "0";
+        if (!this.slideCanvas.style.backgroundPositionY) this.slideCanvas.style.backgroundPositionY = "0";
         var loop;
 
         switch (this.currentAnimation) {
@@ -97,24 +89,20 @@ class SlideCanvas {
             default: {
                 return;
             }
-
         }
-        if (!this.slideCanvas.classList.contains("background_repeat"))
-            this.slideCanvas.classList.add(cls);
+        if (!this.slideCanvas.classList.contains("background_repeat")) this.slideCanvas.classList.add(cls);
         this.background_slide_animation_frame = window.requestAnimationFrame(loop);
         function slideLoopX() {
             var curr = parseFloat(_this.slideCanvas.style.backgroundPositionX);
-            _this.slideCanvas.style.backgroundPositionX = (curr + (_this.background_slide_speed * _this.direction)) + "px";
+            _this.slideCanvas.style.backgroundPositionX = curr + _this.background_slide_speed * _this.direction + "px";
             _this.background_slide_animation_frame = window.requestAnimationFrame(slideLoopX);
         }
         function slideLoopY() {
             var curr = parseFloat(_this.slideCanvas.style.backgroundPositionY);
-            _this.slideCanvas.style.backgroundPositionY = (curr + (_this.background_slide_speed * _this.direction)) + "px";
+            _this.slideCanvas.style.backgroundPositionY = curr + _this.background_slide_speed * _this.direction + "px";
             _this.background_slide_animation_frame = window.requestAnimationFrame(slideLoopY);
         }
-
     }
-
 
     updateBobAmount() {
         this.bobMultiplier = parseFloat(this.menu.querySelector(".bob_amount_input").value);
@@ -125,72 +113,63 @@ class SlideCanvas {
         var cls = this;
         this.bobAnimation = !this.bobAnimation;
         if (this.bobAnimation) {
-            this.slideCanvas.classList.add("background_repeat")
-            this.bobAnimationFrame = window.requestAnimationFrame(bobAnimate)
+            this.slideCanvas.classList.add("background_repeat");
+            this.bobAnimationFrame = window.requestAnimationFrame(bobAnimate);
         } else {
             window.cancelAnimationFrame(this.bobAnimationFrame);
-            this.slideCanvas.classList.remove("background_repeat")
+            this.slideCanvas.classList.remove("background_repeat");
             this.slideCanvas.style.backgroundPositionX = "0";
             this.slideCanvas.style.backgroundPositionY = "0";
         }
         this.notifyChanges();
 
         function bobAnimate() {
-
             cls.bobCountX += cls.bobStep;
             cls.bobCountY += cls.bobStep;
             var valX = 1 - cls.easinOut(cls.bobCountX);
             valX *= cls.bobMultiplier;
 
-            var valY = cls.easinOut(cls.bobCountY)
+            var valY = cls.easinOut(cls.bobCountY);
             valY *= cls.bobMultiplier;
             var currX = parseFloat(cls.slideCanvas.style.backgroundPositionX) || 0;
-            cls.slideCanvas.style.backgroundPositionX = (currX + valX * cls.dirX) + "px";
+            cls.slideCanvas.style.backgroundPositionX = currX + valX * cls.dirX + "px";
 
             var currY = parseFloat(cls.slideCanvas.style.backgroundPositionY) || 0;
-            cls.slideCanvas.style.backgroundPositionY = (currY + valY * cls.dirY) + "px";
+            cls.slideCanvas.style.backgroundPositionY = currY + valY * cls.dirY + "px";
 
             if (cls.bobCountY >= 1) {
                 cls.bobCountY = 0;
                 cls.dirY *= -1;
-
             }
 
             if (cls.bobCountX >= 1) {
                 cls.bobCountX = 0;
                 cls.dirX *= -1;
-
             }
             cls.bobAnimationFrame = window.requestAnimationFrame(bobAnimate);
         }
-
     }
 
     easinOut(k) {
-
         return Math.pow(k, 1.675);
-
     }
     updateSlideSpeed() {
-        this.background_slide_speed =  this.menu.querySelector(".slide_speed_input").value;
+        this.background_slide_speed = this.menu.querySelector(".slide_speed_input").value;
         this.notifyChanges();
     }
 
     loadSlideState(data) {
-
         if (data.bg_slide_type) {
             if (data.bg_slide_speed) {
                 this.background_slide_speed = data.bg_slide_speed;
-                if (this.menu)
-                    this.menu.querySelector(".slide_speed_input").value = data.bg_slide_speed;
+                if (this.menu) this.menu.querySelector(".slide_speed_input").value = data.bg_slide_speed;
             }
             if (this.menu) {
-                var button = [...this.menu.querySelectorAll(".background_slide_button")].find(x => x.getAttribute("data-slide") == data.bg_slide_type);
+                var button = [...this.menu.querySelectorAll(".background_slide_button")].find((x) => x.getAttribute("data-slide") == data.bg_slide_type);
                 button.click();
             } else {
                 this.setBackgroundSlide(data.bg_slide_type);
             }
-
         } else {
             this.setBackgroundSlide(null);
         }
@@ -205,25 +184,23 @@ class SlideCanvas {
             }
             if (!this.bobAnimation) {
                 if (this.menu) {
-                    console.log(this.menu.querySelector(".toggle_bob_animation_button"))
+                    console.log(this.menu.querySelector(".toggle_bob_animation_button"));
                     this.menu.querySelector(".toggle_bob_animation_button").click();
                 } else {
-                    this.toggleBobAnimation()
+                    this.toggleBobAnimation();
                 }
             }
         } else {
             if (this.bobAnimation) {
                 if (this.menu) {
-                    console.log(this.menu.querySelector(".toggle_bob_animation_button"))
+                    console.log(this.menu.querySelector(".toggle_bob_animation_button"));
                     this.menu.querySelector(".toggle_bob_animation_button").click();
                 } else {
-                    this.toggleBobAnimation()
+                    this.toggleBobAnimation();
                 }
             }
         }
-
     }
 }
-
 
 module.exports = SlideCanvas;

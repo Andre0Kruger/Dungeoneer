@@ -73,7 +73,7 @@ var pawns = (function () {
     players.onchange = function () {
         serverNotifier.notifyServer(
             "players-changed",
-            players.map((x) => x[1])
+            players.map((x) => x[1]),
         );
     };
 
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 resumeAllAnimations();
             }
         },
-        false
+        false,
     );
 });
 
@@ -662,10 +662,7 @@ function setMapZoom(event, newSize) {
 var lastMeasuredLineDrawn,
     totalMeasuredDistance = 0;
 function drawLineAndShowTooltip(originPosition, destinationPoint, event) {
-    var measuredDistance =
-        Math.round(
-            (Math.sqrt(Math.pow(destinationPoint.x - originPosition.x, 2) + Math.pow(destinationPoint.y - originPosition.y, 2) + Math.pow(destinationPoint.z - originPosition.z, 2)) / cellSize) * 5
-        ) + totalMeasuredDistance;
+    var measuredDistance = Math.round((Math.sqrt(Math.pow(destinationPoint.x - originPosition.x, 2) + Math.pow(destinationPoint.y - originPosition.y, 2) + Math.pow(destinationPoint.z - originPosition.z, 2)) / cellSize) * 5) + totalMeasuredDistance;
 
     if (lastMeasuredLineDrawn) {
         measurements.eraseModeOn();
@@ -1012,10 +1009,7 @@ function refreshMeasurementTooltip() {
             z: (cellSize / UNITS_PER_GRID) * parseInt(measurementTargetOrigin.flying_height),
         };
 
-        tooltip.innerHTML =
-            Math.round(
-                (Math.sqrt(Math.pow(destinationPoint.x - originPosition.x, 2) + Math.pow(destinationPoint.y - originPosition.y, 2) + Math.pow(destinationPoint.z - originPosition.z, 2)) / cellSize) * 5
-            ) + ` ${MAP_UNIT}`;
+        tooltip.innerHTML = Math.round((Math.sqrt(Math.pow(destinationPoint.x - originPosition.x, 2) + Math.pow(destinationPoint.y - originPosition.y, 2) + Math.pow(destinationPoint.z - originPosition.z, 2)) / cellSize) * 5) + ` ${MAP_UNIT}`;
     }
 }
 
@@ -1105,7 +1099,7 @@ function dragPawn(elmnt) {
                         y: e.clientY,
                         z: (cellSize / UNITS_PER_GRID) * parseInt(e.target.flying_height),
                     },
-                    e
+                    e,
                 );
                 measurementPaused = true;
                 return;
@@ -1283,10 +1277,10 @@ function dragPawn(elmnt) {
                                 pos: map.objectGridCoords(obj),
                                 id: obj.id,
                             };
-                        })
+                        }),
                     );
                 })
-                .flat()
+                .flat(),
         );
     }
 }

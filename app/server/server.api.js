@@ -21,7 +21,11 @@ contextBridge.exposeInMainWorld("api", {
     diceRoller,
     extname: (path) => pathModule.extname(path),
     messageWindow: (windowName, eventName, args) => {
-        return ipcRenderer.send("notify-window", { name: windowName, event: eventName, args: args });
+        return ipcRenderer.send("notify-window", {
+            name: windowName,
+            event: eventName,
+            args: args,
+        });
     },
 });
 

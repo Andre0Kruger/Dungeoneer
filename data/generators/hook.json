@@ -1,31 +1,10 @@
 {
     "routes": [
-        [
-            0,
-            5,
-            7
-        ],
-        [
-            1,
-            5,
-            6
-        ],
-        [
-            0,
-            2,
-            8
-        ],
-        [
-            0,
-            3,
-            4
-        ],
-        [
-            0,
-            2,
-            9,
-            5
-        ]
+        [0, 5, 7],
+        [1, 5, 6],
+        [0, 2, 8],
+        [0, 3, 4],
+        [0, 2, 9, 5]
     ],
     "messageFromHal": [
         [
@@ -38,23 +17,9 @@
             "After the skies have fallen, the ",
             "After a great earthquake the "
         ],
-        [
-            "It was the ",
-            "The mists have broken, it was the "
-        ],
-        [
-            "house on the hill ",
-            "old mill ",
-            "olde Tavern ",
-            "resplendant hill fort ",
-            "cavern system "
-        ],
-        [
-            "blackened ruins ",
-            "burial mounds ",
-            "hills to the South ",
-            "sacred Elven stones "
-        ],
+        ["It was the ", "The mists have broken, it was the "],
+        ["house on the hill ", "old mill ", "olde Tavern ", "resplendant hill fort ", "cavern system "],
+        ["blackened ruins ", "burial mounds ", "hills to the South ", "sacred Elven stones "],
         [
             "leave no visitors alive",
             "have awakened",
@@ -79,11 +44,7 @@
             "malignant swamp dweller",
             "treacherous lecher"
         ],
-        [
-            " who had done it all along..",
-            " who was seen on that dark, rainy night",
-            " who brought upon us this curse"
-        ],
+        [" who had done it all along..", " who was seen on that dark, rainy night", " who brought upon us this curse"],
         [
             " has a dark, dark, secret",
             " cannot be killed by any ordinary means",
@@ -101,10 +62,6 @@
             "is under a malignant curse",
             "carries treasures that are not of this world"
         ],
-        [
-            "has an unlikely occupant: the ",
-            "will be the death of the ",
-            "was once the home of the "
-        ]
+        ["has an unlikely occupant: the ", "will be the death of the ", "was once the home of the "]
     ]
 }

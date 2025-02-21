@@ -35,20 +35,8 @@ function showWelcomeModal() {
     var modal = ClientModals.createModal("Welcome to Dungeoneer", () => {});
     var cont = Util.ele("div", "column");
     cont.appendChild(Util.ele("div", "die_d20", ""));
-    cont.appendChild(
-        Util.ele(
-            "p",
-            "p_large",
-            "You can use this site to connect to a game hosted by someone with the Dungeoneer client. You will need a host ID and password provided by your game host. Please report any bugs you find by submitting an issue on <a href = 'https://github.com/Durtur/Dungeoneer/issues'>Github</a>."
-        )
-    );
-    cont.appendChild(
-        Util.ele(
-            "p",
-            "p_large warning_text",
-            "Only Android mobile browsers are suppoted at the moment. If you are on iPhone or iPad switch the page to full screen, otherwise grid selection will be misaligned."
-        )
-    );
+    cont.appendChild(Util.ele("p", "p_large", "You can use this site to connect to a game hosted by someone with the Dungeoneer client. You will need a host ID and password provided by your game host. Please report any bugs you find by submitting an issue on <a href = 'https://github.com/Durtur/Dungeoneer/issues'>Github</a>."));
+    cont.appendChild(Util.ele("p", "p_large warning_text", "Only Android mobile browsers are suppoted at the moment. If you are on iPhone or iPad switch the page to full screen, otherwise grid selection will be misaligned."));
 
     var btn = Util.ele("button", "button_style green  center", "Start playing");
     btn.onclick = (e) => modal.modal.close();
@@ -216,8 +204,8 @@ function setState(message) {
             setMapEdge(
                 toBase64Url(
                     getDataBuffer(message.event).reduce((a, b) => a + b),
-                    message.data.metadata?.format
-                )
+                    message.data.metadata?.format,
+                ),
             );
             break;
         case "foreground":
@@ -228,20 +216,20 @@ function setState(message) {
             setMapBackgroundAsBase64(
                 toBase64Url(
                     getDataBuffer(message.event)?.reduce((a, b) => a + b),
-                    message.data.metadata?.format
+                    message.data.metadata?.format,
                 ),
                 message.data.metadata?.width || 0,
-                message.data.metadata?.height || 0
+                message.data.metadata?.height || 0,
             );
             break;
         case "overlay":
             setMapOverlayAsBase64(
                 toBase64Url(
                     getDataBuffer(message.event)?.reduce((a, b) => a + b),
-                    message.data.metadata?.format
+                    message.data.metadata?.format,
                 ),
                 message.data.metadata?.width || 0,
-                message.data.metadata?.height || 0
+                message.data.metadata?.height || 0,
             );
             break;
         case "tokens-set":
@@ -380,7 +368,10 @@ function setState(message) {
             break;
         case "chat-message":
             chat.messageReceived(message.data);
-            pawnManager.talkBubble({ text: message.data.text, elementId: message.data.elementId });
+            pawnManager.talkBubble({
+                text: message.data.text,
+                elementId: message.data.elementId,
+            });
             break;
         case "filter-set":
             map.setFilter(message.data.filter);
@@ -455,10 +446,10 @@ function clientSetForeground(message) {
     setMapForegroundAsBase64(
         toBase64Url(
             getDataBuffer(message.event)?.reduce((a, b) => a + b),
-            message.data.metadata?.format
+            message.data.metadata?.format,
         ),
         message.data?.metadata?.width,
-        message.data?.metadata?.height
+        message.data?.metadata?.height,
     );
     if (message.data?.metadata?.translate) {
         var trsl = message.data.metadata.translate;

@@ -1,6 +1,5 @@
 {
-    "countrounds" : true,
-    
-    "max_auto_loads" : 80
+    "countrounds": true,
 
+    "max_auto_loads": 80
 }
