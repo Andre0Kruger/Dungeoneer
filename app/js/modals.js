@@ -51,14 +51,7 @@ const Modals = (function () {
         };
         var col = Util.ele("div", "column");
         inputs.forEach((inputType) => {
-            var inputRow = createPromptInput(
-                inputType.label,
-                modal,
-                confirm,
-                "row",
-                inputType.required,
-                inputType.id
-            );
+            var inputRow = createPromptInput(inputType.label, modal, confirm, "row", inputType.required, inputType.id);
             col.appendChild(inputRow);
         });
         modal.appendChild(col);
@@ -107,14 +100,7 @@ const Modals = (function () {
         modal.querySelector("input").focus();
     }
 
-    function createPromptInput(
-        label,
-        modal,
-        callback,
-        rowClass = "column",
-        required = false,
-        id = null
-    ) {
+    function createPromptInput(label, modal, callback, rowClass = "column", required = false, id = null) {
         var input = Util.ele("input", "modal_input");
         if (required) input.setAttribute("data-required", true);
         input.setAttribute("data-property", label);
@@ -170,10 +156,7 @@ const Modals = (function () {
         input.value = options.initialValue || "";
 
         minifiedPrompts[options.id] = modal;
-        elementCreator.makeDraggable(
-            modal,
-            modal.querySelector("h1:first-of-type")
-        );
+        elementCreator.makeDraggable(modal, modal.querySelector("h1:first-of-type"));
         window.setTimeout(() => modal.querySelector("input").focus(), 500);
     }
 

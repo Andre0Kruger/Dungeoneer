@@ -74,7 +74,11 @@ class ShopGenerator {
                 return { label: x.name, value: x.id };
             });
             if (this.searchAwesomplete) this.searchAwesomplete.destroy();
-            this.searchAwesomplete = new Awesomplete(cls.searchInput, { list: searchData, autoFirst: true, minChars: 0 });
+            this.searchAwesomplete = new Awesomplete(cls.searchInput, {
+                list: searchData,
+                autoFirst: true,
+                minChars: 0,
+            });
             cls.searchInput.addEventListener("awesomplete-selectcomplete", (e) => {
                 cls.searchInput.value = e.text.label;
                 cls.fetchShop(e.text.value);
@@ -127,7 +131,7 @@ class ShopGenerator {
             (e) => {
                 cls.saveShop();
             },
-            true
+            true,
         );
         parent.appendChild(note.container());
         cont.appendChild(parent);
@@ -239,7 +243,6 @@ class ShopGenerator {
             shopInventory.tooltips = tooltipsForTable;
             cls.currentShop.inventory = shopInventory;
 
-
             cls.displayShop();
             if (callback) callback();
         });
@@ -304,7 +307,6 @@ class ShopGenerator {
         }
     }
 
-
     comparePrice(a, b, descending) {
         var idxA = parseInt(a.replace(",", ""));
         var idxB = parseInt(b.replace(",", ""));
@@ -319,8 +321,12 @@ class ShopGenerator {
         }
         var shopInventory = this.currentShop?.inventory;
         if (!shopInventory) return;
-        console.log(shopInventory)
-        var table = ElementCreator.generateHTMLTable(shopInventory, { enabled: true, rarity: compareRarity, price: this.comparePrice });
+        console.log(shopInventory);
+        var table = ElementCreator.generateHTMLTable(shopInventory, {
+            enabled: true,
+            rarity: compareRarity,
+            price: this.comparePrice,
+        });
 
         tableContainer.setAttribute("data-shop_inventory", JSON.stringify(shopInventory));
         tableContainer.appendChild(table);

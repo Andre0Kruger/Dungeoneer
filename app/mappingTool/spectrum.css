@@ -33,7 +33,8 @@ License: MIT
 
 /* Fix for * { box-sizing: border-box; } */
 
-.sp-container, .sp-container * {
+.sp-container,
+.sp-container * {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
@@ -81,7 +82,8 @@ License: MIT
     padding-top: 80%;
 }
 
-.sp-sat, .sp-val {
+.sp-sat,
+.sp-val {
     position: absolute;
     top: 0;
     left: 0;
@@ -106,7 +108,7 @@ License: MIT
     cursor: pointer;
 
     background: white;
-    opacity: .8;
+    opacity: 0.8;
 }
 
 .sp-alpha {
@@ -142,7 +144,16 @@ License: MIT
 
 /* Don't allow text selection */
 
-.sp-container, .sp-replacer, .sp-preview, .sp-dragger, .sp-slider, .sp-alpha, .sp-clear, .sp-alpha-handle, .sp-container.sp-dragging .sp-input, .sp-container button {
+.sp-container,
+.sp-replacer,
+.sp-preview,
+.sp-dragger,
+.sp-slider,
+.sp-alpha,
+.sp-clear,
+.sp-alpha-handle,
+.sp-container.sp-dragging .sp-input,
+.sp-container button {
     -webkit-user-select: none;
     -moz-user-select: -moz-none;
     -o-user-select: none;
@@ -180,8 +191,8 @@ License: MIT
 /* Gradients for hue, saturation and value instead of images.  Not pretty... but it works */
 
 .sp-sat {
-    background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#FFF), to(rgba(204, 154, 129, 0)));
-    background-image: -webkit-linear-gradient(left, #FFF, rgba(204, 154, 129, 0));
+    background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#fff), to(rgba(204, 154, 129, 0)));
+    background-image: -webkit-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
     background-image: -moz-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
     background-image: -o-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
     background-image: -ms-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
@@ -205,7 +216,18 @@ License: MIT
     background: -moz-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
     background: -ms-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
     background: -o-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
-    background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), color-stop(0.17, #ffff00), color-stop(0.33, #00ff00), color-stop(0.5, #00ffff), color-stop(0.67, #0000ff), color-stop(0.83, #ff00ff), to(#ff0000));
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#ff0000),
+        color-stop(0.17, #ffff00),
+        color-stop(0.33, #00ff00),
+        color-stop(0.5, #00ffff),
+        color-stop(0.67, #0000ff),
+        color-stop(0.83, #ff00ff),
+        to(#ff0000)
+    );
     background: -webkit-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
     background: linear-gradient(to bottom, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%);
 }
@@ -251,7 +273,8 @@ License: MIT
 
 /* Clearfix hack */
 
-.sp-cf:before, .sp-cf:after {
+.sp-cf:before,
+.sp-cf:after {
     content: "";
     display: table;
 }
@@ -301,7 +324,7 @@ License: MIT
     right: -1px;
 
     background: white;
-    opacity: .8;
+    opacity: 0.8;
 }
 
 /*
@@ -314,7 +337,7 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     border-radius: 0;
 
     /* background-image: url(img/phbbg.png); */
- 
+
     background-color: var(--main-color);
     border-radius: var(--rounded-corners);
     padding: 0;
@@ -324,7 +347,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     margin-bottom: 3px;
 }
 
-.sp-color, .sp-hue, .sp-clear {
+.sp-color,
+.sp-hue,
+.sp-clear {
     border: solid 1px #666;
 }
 
@@ -341,15 +366,12 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 }
 
 .sp-input {
-
     border: 1px inset;
     padding: 4px 5px;
     margin: 0;
 
-
     border-radius: 3px;
     color: #222;
-
 }
 
 .sp-input:focus {
@@ -361,17 +383,16 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     background: #fdd;
 }
 
-.sp-picker-container, .sp-palette-container {
+.sp-picker-container,
+.sp-palette-container {
     float: left;
     position: relative;
     display: flex;
     flex-flow: column nowrap;
-
 }
 
 .sp-picker-container {
     width: 172px;
-
 }
 
 /* Palettes */
@@ -395,7 +416,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     border: solid 2px transparent;
 }
 
-.sp-palette .sp-thumb-el:hover, .sp-palette .sp-thumb-el.sp-thumb-active {
+.sp-palette .sp-thumb-el:hover,
+.sp-palette .sp-thumb-el.sp-thumb-active {
     border-color: orange;
 }
 
@@ -407,7 +429,6 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 
 .sp-initial {
     float: left;
-    
 }
 
 .sp-initial span {
@@ -425,7 +446,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 
 /* Buttons */
 
-.sp-palette-button-container, .sp-button-container {
+.sp-palette-button-container,
+.sp-button-container {
     float: right;
     display: flex;
     flex-flow: column nowrap;
@@ -461,7 +483,8 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     height: 20px;
 }
 
-.sp-replacer:hover, .sp-replacer.sp-active {
+.sp-replacer:hover,
+.sp-replacer.sp-active {
     border-color: var(--main-emphasis-color);
     color: #111;
 }
@@ -508,7 +531,9 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
 
 /* Buttons: http://hellohappy.org/css3-buttons/ */
 
-.sp-container button, .sp-cancel, .sp-choose {
+.sp-container button,
+.sp-cancel,
+.sp-choose {
     text-decoration: none;
     color: var(--inverse-text-color);
     margin: auto;
@@ -526,26 +551,28 @@ See http://bgrins.github.io/spectrum/themes/ for instructions.
     padding: 0.75em;
     text-align: center;
     width: 9.25em;
-
-
 }
 
-.sp-container button:hover, .sp-cancel:hover {
+.sp-container button:hover,
+.sp-cancel:hover {
     background-color: var(--main-emphasis-color);
 }
 
-
-
-.sp-palette span:hover, .sp-palette span.sp-thumb-active {
+.sp-palette span:hover,
+.sp-palette span.sp-thumb-active {
     border-color: #000;
 }
 
-.sp-preview, .sp-alpha, .sp-thumb-el {
+.sp-preview,
+.sp-alpha,
+.sp-thumb-el {
     position: relative;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
 }
 
-.sp-preview-inner, .sp-alpha-inner, .sp-thumb-inner {
+.sp-preview-inner,
+.sp-alpha-inner,
+.sp-thumb-inner {
     display: block;
     position: absolute;
     top: 0;

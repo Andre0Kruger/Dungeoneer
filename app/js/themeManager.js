@@ -2,8 +2,8 @@ const pathModule = require("path");
 
 class ThemeManager {
     constructor() {
-        this.THEME_PATH = pathModule.join(window.api.getAppPath(), 'app', 'css', 'themes');
-        this.BASE_CSS_PATH = pathModule.join(window.api.getAppPath(), 'app', 'css');
+        this.THEME_PATH = pathModule.join(window.api.getAppPath(), "app", "css", "themes");
+        this.BASE_CSS_PATH = pathModule.join(window.api.getAppPath(), "app", "css");
     }
 
     async getThemes() {
@@ -11,9 +11,7 @@ class ThemeManager {
         return themes;
     }
 
-    rootStyles(){
-        
-    }
+    rootStyles() {}
 
     initThemeFile(selectedTheme) {
         console.log("Init theme file");
@@ -22,7 +20,6 @@ class ThemeManager {
         var writePath = pathModule.join(this.BASE_CSS_PATH, "theme.css");
         fs.createReadStream(themePath).pipe(fs.createWriteStream(writePath));
     }
-
 }
 var instance = new ThemeManager();
 module.exports = instance;

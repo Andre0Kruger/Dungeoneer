@@ -1,17 +1,14 @@
-
-const sidebarManager = function () {
+const sidebarManager = (function () {
     var onClosedFn;
     function showInSideBar(element, onclosedFn) {
-        if (onClosedFn)
-            this.close();
+        if (onClosedFn) this.close();
         onClosedFn = onclosedFn;
         var sidebar = document.getElementById("side_toolbar");
         sidebar.setAttribute("toggled", "true");
         while (sidebar.firstChild) {
             sidebar.removeChild(sidebar.firstChild);
         }
-        if (element.parentNode)
-            element.parentNode.removeChild(element);
+        if (element.parentNode) element.parentNode.removeChild(element);
         sidebar.appendChild(element);
     }
     function close() {
@@ -22,8 +19,8 @@ const sidebarManager = function () {
     }
     return {
         close: close,
-        showInSideBar: showInSideBar
-    }
-}();
+        showInSideBar: showInSideBar,
+    };
+})();
 
 module.exports = sidebarManager;

@@ -1,61 +1,56 @@
 .rumor_row {
-    transition:all var(--transition-delay);
-    padding-left:1em;
+    transition: all var(--transition-delay);
+    padding-left: 1em;
     box-sizing: border-box;
 }
 
-.main_content_wrapper{
-    display:flex;
+.main_content_wrapper {
+    display: flex;
     flex-flow: row nowrap;
 }
 
-#taverns{
+#taverns {
     background-image: url(img/tavern-sign.png);
-
 }
 
-#npc{
+#npc {
     background-image: url(img/viking-head.png);
 }
-#shops{
-    
+#shops {
     background-image: url(img/scales.png);
 }
-#customize{
+#customize {
     background-image: url(img/gear-hammer.png);
 }
 
 .section__tool__large {
-    width:100%;
-    margin:0;
-    margin-left:2.5em;
- 
+    width: 100%;
+    margin: 0;
+    margin-left: 2.5em;
 }
 .rumor_row:hover {
     border-left: 0.2em solid var(--main-underline-color);
     box-sizing: border-box;
 }
 
-.rumor_row .rumor_row_name,  .rumor_row_description {
+.rumor_row .rumor_row_name,
+.rumor_row_description {
     font-family: "bookSanity";
 }
 
-.rumor_row_rumor{
- 
-    margin-left:1em;
+.rumor_row_rumor {
+    margin-left: 1em;
     font-size: 1.25em;
     font-style: italic;
 }
 @media (min-width: 884px) {
     #tavern_rumors {
         margin-left: 2em;
-      
     }
-    .table_and_rumors{
+    .table_and_rumors {
         flex-flow: row nowrap !important;
-        
     }
-    #tavern_rumors>div>h2 {
+    #tavern_rumors > div > h2 {
         padding: 0;
         margin: 0;
     }
@@ -66,14 +61,13 @@
     position: relative;
 }
 
-.generate_button{
-    width:100%;
-   
+.generate_button {
+    width: 100%;
 }
-.generate_button:first-child{
-    margin-top:3em;
+.generate_button:first-child {
+    margin-top: 3em;
 }
-#regenerate_name_button{
+#regenerate_name_button {
     margin-top: 7.25em;
 }
 
@@ -100,7 +94,7 @@
     margin-bottom: 12px;
 }
 
-.creature_generation_buttons>button {
+.creature_generation_buttons > button {
     padding: 6px;
     font-size: 14px;
     min-width: 110px;
@@ -113,31 +107,32 @@ select {
 
 #random_table_dump {
     white-space: pre;
-    width:100%;
+    width: 100%;
 }
-#random_table_name_input{
-    padding:5px;
-}
-
-.generator_customization_section textarea{
-    min-height:100px;
+#random_table_name_input {
+    padding: 5px;
 }
 
-.explaination_text{
+.generator_customization_section textarea {
+    min-height: 100px;
+}
+
+.explaination_text {
     font-size: 13px;
     color: darkslategray;
-    cursor:help;
+    cursor: help;
 }
 
 .generator_header {
     height: 117px;
 }
 
-.random_table_followup_input, .encounter_set_add_creature {
+.random_table_followup_input,
+.encounter_set_add_creature {
     border: none;
     background-color: transparent;
     text-align: center;
-    color:var(--main-text-color);
+    color: var(--main-text-color);
 }
 
 .table_and_rumors {
@@ -147,35 +142,32 @@ select {
     margin-top: 1em;
 }
 
-
 .customize_tab_row {
     top: 0;
     left: 0;
     position: absolute;
     height: 35px;
 }
-#generated_npc_profession{
+#generated_npc_profession {
     margin-bottom: 0.5em;
     font-size: 1.25em;
     font-style: italic;
     font-family: var(--basic-font);
-
 }
-#generated_npc_name{
-    font-size:2em;
-    padding-top:2em;
+#generated_npc_name {
+    font-size: 2em;
+    padding-top: 2em;
     margin-bottom: 0.25em;
 }
-#tavern_description>p:first-of-type>strong::first-letter{
+#tavern_description > p:first-of-type > strong::first-letter {
     line-height: 2;
 }
 .shop__name {
-
     color: black;
     padding-top: 2em;
     text-align: left;
     font-size: 20px;
-    color:var(--main-header-color);
+    color: var(--main-header-color);
     padding-top: 60px;
 }
 
@@ -183,16 +175,18 @@ path {
     fill: transparent;
 }
 
-#tavern_table, #shop_table {
+#tavern_table,
+#shop_table {
     min-width: 20em;
 }
 
-#tavern_name, #shop_name {
+#tavern_name,
+#shop_name {
     font-family: var(--header-font);
-  
+
     white-space: "pre";
     overflow: visible;
-    font-size:2em;
+    font-size: 2em;
 }
 
 .generator_tab {
@@ -218,7 +212,7 @@ path {
 .genchooser_smaller {
     max-width: 250px;
     width: 250px;
-    position:relative;
+    position: relative;
 }
 
 .genname {
@@ -233,11 +227,11 @@ th {
     cursor: pointer;
 }
 
-#shop_generator_table>table>thead>tr>th:hover {
+#shop_generator_table > table > thead > tr > th:hover {
     background-image: url("img/arrow.png");
 }
 
-#shop_generator_table>table>thead>tr>th {
+#shop_generator_table > table > thead > tr > th {
     background-position: right;
     background-size: 10px;
     background-repeat: no-repeat;
@@ -261,7 +255,7 @@ th {
     background-image: url("img/quillH.png");
 }
 
-.treeview_attribute:hover>.edit_button {
+.treeview_attribute:hover > .edit_button {
     display: block;
 }
 
@@ -269,12 +263,12 @@ th {
     display: flex;
 }
 
-.treeview_attribute>input {
+.treeview_attribute > input {
     width: 100%;
     padding: 4px;
 }
 
-.treeview_attribute>p {
+.treeview_attribute > p {
     margin: 2px;
     color: var(--main-color);
     font-family: var(--basic-font);
@@ -307,7 +301,6 @@ th {
     font-family: var(--basic-font);
     user-select: none;
     flex: 0 0 100%;
-
 }
 
 .treeview_caret li {
@@ -315,8 +308,8 @@ th {
     font-weight: normaL;
 }
 
-.treeview_active li:not(.treeview_attribute){
-    width:100%;
+.treeview_active li:not(.treeview_attribute) {
+    width: 100%;
 }
 
 /* Create the caret/arrow with a unicode, and style it */
@@ -340,16 +333,16 @@ th {
     display: none;
 }
 
-.new_treeview_attribute{
-    background-color:#e9e3e3;
+.new_treeview_attribute {
+    background-color: #e9e3e3;
 }
 
 /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
-.treeview_active>.treeview_attribute:not(.new_treeview_attribute){
+.treeview_active > .treeview_attribute:not(.new_treeview_attribute) {
     background-color: white;
 }
 
-.treeview_active>.treeview_attribute{
+.treeview_active > .treeview_attribute {
     border: 1px solid gray;
     border-radius: 5px;
     padding: 2px;
@@ -361,13 +354,12 @@ th {
     margin-bottom: 5px;
 }
 
-#customize_table tr .remove_button{
-    display:none;
-
+#customize_table tr .remove_button {
+    display: none;
 
     margin-top: 0.5em;
     margin-right: -1.5em;
 }
-#customize_table tr:hover .remove_button{
-    display:flex;
+#customize_table tr:hover .remove_button {
+    display: flex;
 }

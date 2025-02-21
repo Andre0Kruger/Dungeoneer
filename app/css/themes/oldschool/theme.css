@@ -1,11 +1,11 @@
 :root {
     --main-color: #500c00;
-    --alt-main-color: #451A17;
+    --alt-main-color: #451a17;
     --main-emphasis-color: #a12d20;
-    --color-red: #a72424;;
-    --black:black;
+    --color-red: #a72424;
+    --black: black;
     --alt-emphasis-color: rgb(189 151 74 / 40%);
-    --highlight-color:hsl(54deg 58% 43%);
+    --highlight-color: hsl(54deg 58% 43%);
     --main-underline-color: rgb(61, 17, 9);
     --main-success-color: rgb(4, 64, 4);
     --main-success-color-darker: rgb(2, 44, 2);
@@ -14,48 +14,46 @@
     --transition-delay: 300ms;
     --base-margin: 10px;
     --rounded-corners: 5px;
-    --background-image:url("./img/phbbgbig.png") , url("https://github.com/Durtur/Dungeoneer/blob/master/app/css/img/phbbg.png?raw=true");
+    --background-image: url("./img/phbbgbig.png"), url("https://github.com/Durtur/Dungeoneer/blob/master/app/css/img/phbbg.png?raw=true");
     --main-header-color: #500c00;
-    --background-color:transparent;
+    --background-color: transparent;
     --foreground-image: url("./img/phbbg.png"), url("https://github.com/Durtur/Dungeoneer/blob/master/app/css/img/phbbg.png?raw=true");
-    --foreground-color:transparent;
-    --main-text-color:black;
-    --muted-text-color:rgb(85, 85, 85);
-    --inverse-text-color:white;
-    --text-on-foreground-color:white;
+    --foreground-color: transparent;
+    --main-text-color: black;
+    --muted-text-color: rgb(85, 85, 85);
+    --inverse-text-color: white;
+    --text-on-foreground-color: white;
     --black-bg: rgba(34, 34, 34, 0.8);
     --basic-font: "roboto";
     --header-font: "mrEaves";
     --error-bg-input: #ff9b9b;
-    --lighter-background:rgb(255 255 255 / 50%);
-  }
+    --lighter-background: rgb(255 255 255 / 50%);
+}
 
-  
 @font-face {
     font-family: mrEaves;
     src: url("./fonts/Mr Eaves Small Caps.otf");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: nodesto;
     src: url("./fonts/Nodesto Caps Condensed.otf");
-  }
-  
+}
 
-  @font-face {
+@font-face {
     font-family: misDirection;
     src: url("./fonts/Zatanna Misdirection.otf");
-  }
-  
-  @font-face {
+}
+
+@font-face {
     font-family: solbera;
     src: url("./fonts/Solbera Imitation.otf");
-  }
+}
 
-  .die_d20:hover {
+.die_d20:hover {
     background-image: url("./img/d20hover.png");
-  }
+}
 
-  .mainpage_header{
+.mainpage_header {
     background-image: var(--foreground-image);
-  }
+}

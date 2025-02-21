@@ -44,28 +44,7 @@ class StatblockPresenter {
 
         validateEntry(statblockEntry);
         var abilityScores = {};
-        [
-            addClasses,
-            addName,
-            addRitual,
-            addSpellProperties,
-            storeDescription,
-            createTypeDescription,
-            addRequiredProperties,
-            addSpeed,
-            addSavingThrowRow,
-            addAbilityRow,
-            morphActions,
-            storeTable,
-            storeHigherLevels,
-            addSkills,
-            createAndAddEncounterDescription,
-            populateRemainingStats,
-            addDescription,
-            addTable,
-            addHigherLevels,
-            finalizeStatblock,
-        ].forEach((step) => {
+        [addClasses, addName, addRitual, addSpellProperties, storeDescription, createTypeDescription, addRequiredProperties, addSpeed, addSavingThrowRow, addAbilityRow, morphActions, storeTable, storeHigherLevels, addSkills, createAndAddEncounterDescription, populateRemainingStats, addDescription, addTable, addHigherLevels, finalizeStatblock].forEach((step) => {
             if (typeof step == "function") return step();
             baseCreatePropertyAndDelete(step);
         });
@@ -108,7 +87,7 @@ class StatblockPresenter {
                         dataAccess.saveToken(statblockEntry.id + "0", path);
                         tokenEle.src = path;
                     },
-                    { name: statblockEntry.name, type: statblockEntry.type }
+                    { name: statblockEntry.name, type: statblockEntry.type },
                 );
             };
 
@@ -248,7 +227,11 @@ class StatblockPresenter {
             var monsterSavingthrowValues = [];
             ["strength_save", "dexterity_save", "constitution_save", "intelligence_save", "wisdom_save", "charisma_save"].forEach((attr) => {
                 if (!values[attr]) {
-                    if (values[attr.replace("_save", "")]) monsterSavingthrowValues.push({ name: attr, value: getAbilityScoreModifier(values[attr.replace("_save", "")]) });
+                    if (values[attr.replace("_save", "")])
+                        monsterSavingthrowValues.push({
+                            name: attr,
+                            value: getAbilityScoreModifier(values[attr.replace("_save", "")]),
+                        });
                     return;
                 }
                 monsterSavingthrowValues.push({ name: attr, value: values[attr] });
@@ -513,7 +496,11 @@ class StatblockPresenter {
                 input.classList.add("hidden");
                 button.classList.remove("hidden");
             });
-            new Awesomplete(input, { list: constants.armorTypes.filter((x) => x.mod).map((x) => x.type.toProperCase()), autoFirst: true, minChars: 0 });
+            new Awesomplete(input, {
+                list: constants.armorTypes.filter((x) => x.mod).map((x) => x.type.toProperCase()),
+                autoFirst: true,
+                minChars: 0,
+            });
             input.addEventListener("awesomplete-selectcomplete", (evt) => {
                 var selectedArmor = constants.armorTypes.find((x) => x.type.toLowerCase() == evt.target.value.toLowerCase());
                 if (selectedArmor.is_shield) {
@@ -555,7 +542,11 @@ class StatblockPresenter {
                 input.classList.add("hidden");
                 button.classList.remove("hidden");
             });
-            new Awesomplete(input, { list: constants.weapons.map((x) => x.name), autoFirst: true, minChars: 0 });
+            new Awesomplete(input, {
+                list: constants.weapons.map((x) => x.name),
+                autoFirst: true,
+                minChars: 0,
+            });
             input.addEventListener("awesomplete-selectcomplete", (evt) => {
                 var selectedWeapon = constants.weapons.find((x) => x.name.toLowerCase() == evt.target.value.toLowerCase());
                 var oldWeapon = constants.weapons.find((x) => x.name.toLowerCase() == evt.target.closest("h3").getAttribute("data-header_value").toLowerCase());
@@ -598,13 +589,7 @@ class StatblockPresenter {
 
                 if (v != "" && attributeNamesToIgnore.indexOf(k) < 0) {
                     if (typeof k == "string") {
-                        statblock.appendChild(
-                            attributeNamesToHeader.indexOf(k.toLowerCase()) >= 0
-                                ? createHeaderSmaller(v)
-                                : attributesWithoutNames.indexOf(k.toLowerCase()) < 0
-                                ? createParaAndBold(k, v)
-                                : createPara(v)
-                        );
+                        statblock.appendChild(attributeNamesToHeader.indexOf(k.toLowerCase()) >= 0 ? createHeaderSmaller(v) : attributesWithoutNames.indexOf(k.toLowerCase()) < 0 ? createParaAndBold(k, v) : createPara(v));
                     }
                 }
             }
@@ -765,7 +750,7 @@ var spellcastingLinkController = (function () {
                         popupWindow.style.left = calculatedLeft + "px";
                     });
                 }, 600);
-            })
+            }),
         );
         allLinks.forEach((link) =>
             link.addEventListener("mouseleave", function (e) {
@@ -774,7 +759,7 @@ var spellcastingLinkController = (function () {
                 delayedClosing = window.setTimeout(function () {
                     if (document.getElementById("spell_popup").getAttribute("data-mouse-over") == "f") $("#spell_popup").finish().fadeOut("slow");
                 }, 600);
-            })
+            }),
         );
     }
     function showSpell(spell) {

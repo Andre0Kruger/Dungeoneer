@@ -1,5 +1,4 @@
 class MobController {
-
     constructor(containerElement, diceRoller) {
         this.parentElement = containerElement;
         this.diceRoller = diceRoller;
@@ -9,18 +8,35 @@ class MobController {
         this.count = 0;
         this.DEFAULT_MOB_SIZE = 10;
         var controller = this;
-        this.loadedMobs.push = function () { Array.prototype.push.apply(this, arguments); controller.loadedMobAdded(); }
-        this.loadedMobs.pop = function () { var ret = Array.prototype.pop.apply(this, arguments); controller.loadedMobRemoved(); return ret; }
-        this.loadedMobs.clear = function () { while (this.length > 0) this.pop() };
-        this.notifyMobBuffer.clear = function () { while (this.length > 0) this.pop() };
-
+        this.loadedMobs.push = function () {
+            Array.prototype.push.apply(this, arguments);
+            controller.loadedMobAdded();
+        };
+        this.loadedMobs.pop = function () {
+            var ret = Array.prototype.pop.apply(this, arguments);
+            controller.loadedMobRemoved();
+            return ret;
+        };
+        this.loadedMobs.clear = function () {
+            while (this.length > 0) this.pop();
+        };
+        this.notifyMobBuffer.clear = function () {
+            while (this.length > 0) this.pop();
+        };
     }
 
     insert(monsterData) {
         this.count++;
         var index = this.createRow(monsterData);
         console.log("Inserting", monsterData);
-        this.loadedMobs.push({ name: monsterData.name, size: monsterData.size ? monsterData.size.toLowerCase() : "medium", index: index, isMob: true, mobSize: this.DEFAULT_MOB_SIZE, monsterId: monsterData.id })
+        this.loadedMobs.push({
+            name: monsterData.name,
+            size: monsterData.size ? monsterData.size.toLowerCase() : "medium",
+            index: index,
+            isMob: true,
+            mobSize: this.DEFAULT_MOB_SIZE,
+            monsterId: monsterData.id,
+        });
     }
 
     createRow(cret) {
@@ -41,9 +57,8 @@ class MobController {
         this.addActionsData(JSON.parse(JSON.stringify(cret)), row);
         var controller = this;
         row.querySelector(".dmg_field").onkeydown = function (e) {
-            if (e.key == "Enter")
-                controller.applyDamage();
-        }
+            if (e.key == "Enter") controller.applyDamage();
+        };
         return "M" + this.count;
     }
 
@@ -57,23 +72,19 @@ class MobController {
             if (a.damage_dice == null && b.damage_dice == null) return 0;
             if (a.damage_dice == null) return 1;
             if (b.damage_dice == null) return -1;
-            return getNumValueForDiceString(b.damage_dice + (b.damage_bonus == null ? "" : "+ " + b.damage_bonus))
-                - getNumValueForDiceString(a.damage_dice + (a.damage_bonus == null ? "" : "+ " + a.damage_bonus));
+            return getNumValueForDiceString(b.damage_dice + (b.damage_bonus == null ? "" : "+ " + b.damage_bonus)) - getNumValueForDiceString(a.damage_dice + (a.damage_bonus == null ? "" : "+ " + a.damage_bonus));
         });
         var attackActions = [];
         var actionPicked = false;
         var actionsString = "";
         for (var i = 0; i < monster.actions.length; i++) {
             if (i > 0) actionsString += "\n";
-            var action = this.createActionString(monster.actions[i])
+            var action = this.createActionString(monster.actions[i]);
 
             var ele = monster.actions[i];
             if ((ele.damage_dice != null || ele.damage_bonus != null) && ele.attack_bonus != null) {
-                ele.damage_string = (ele.damage_dice == null ?
-                    ele.damage_bonus == null ?
-                        "" : ele.damage_bonus :
-                    (monster.actions[i].damage_dice) + (monster.actions[i].damage_bonus == null ? "" : (monster.actions[i].damage_dice != null ? "+" : "") + monster.actions[i].damage_bonus));
-                attackActions.push(ele)
+                ele.damage_string = ele.damage_dice == null ? (ele.damage_bonus == null ? "" : ele.damage_bonus) : monster.actions[i].damage_dice + (monster.actions[i].damage_bonus == null ? "" : (monster.actions[i].damage_dice != null ? "+" : "") + monster.actions[i].damage_bonus);
+                attackActions.push(ele);
                 if (!actionPicked) {
                     action = ">" + action;
                     actionPicked = true;
@@ -91,8 +102,7 @@ class MobController {
             damageLabel.innerText = attackActions[0].name;
             if (attackActions.length > 1) {
                 damageField.setAttribute("data-tooltip", actionsString);
-                damageField.classList.add("tooltipped")
-
+                damageField.classList.add("tooltipped");
             } else {
                 damageField.classList.remove("tooltipped");
             }
@@ -104,21 +114,16 @@ class MobController {
         }
         row.setAttribute("data-dnd_actions", JSON.stringify(attackActions));
         row.setAttribute("data-dnd_current_action", "0");
-
-
     }
     createActionString(action) {
-        return action.name + (action.attack_bonus == null ? " " : ": +" + action.attack_bonus + ", ")
-            + (action.damage_dice == null ? "" : action.damage_dice) +
-            (action.damage_bonus == null ? "" : (action.damage_dice != null ? "+" : "") + action.damage_bonus)
+        return action.name + (action.attack_bonus == null ? " " : ": +" + action.attack_bonus + ", ") + (action.damage_dice == null ? "" : action.damage_dice) + (action.damage_bonus == null ? "" : (action.damage_dice != null ? "+" : "") + action.damage_bonus);
     }
     setDamageFieldNextAction(e) {
-
         var row = e.target.closest(".mobcontroller_row");
         var actions = JSON.parse(row.getAttribute("data-dnd_actions"));
-        console.log("YOOYO", actions)
+        console.log("YOOYO", actions);
         if (actions == null || actions.length == 0) return;
-        var index = parseInt(row.getAttribute("data-dnd_current_action"))
+        var index = parseInt(row.getAttribute("data-dnd_current_action"));
         var tooltip = e.target.getAttribute("data-tooltip");
         var tooltipLines = tooltip.split("\n");
         var tooltipIndex = 0;
@@ -136,10 +141,10 @@ class MobController {
         var nextAction = actions[index];
 
         if (actions.length > 1 && nextAction.name != null) {
-            Util.showBubblyText("Switched to " + nextAction.name, { x: e.clientX, y: e.clientY }, true)
+            Util.showBubblyText("Switched to " + nextAction.name, { x: e.clientX, y: e.clientY }, true);
             row.getElementsByClassName("text_upper_damage_label")[0].innerText = nextAction.name;
         }
-        var actionCompare = this.createActionString(nextAction)
+        var actionCompare = this.createActionString(nextAction);
 
         while (tooltipLines[tooltipIndex] != actionCompare) {
             tooltipIndex++;
@@ -149,23 +154,19 @@ class MobController {
             tooltipLines[tooltipIndex] = ">" + tooltipLines[tooltipIndex];
             row.getElementsByClassName("attack_field")[0].value = nextAction.attack_bonus;
             row.getElementsByClassName("damage_field")[0].innerText = nextAction.damage_string;
-            row.setAttribute("data-dnd_current_action", index)
+            row.setAttribute("data-dnd_current_action", index);
 
-            e.target.setAttribute("data-tooltip", tooltipLines.join("\n"))
+            e.target.setAttribute("data-tooltip", tooltipLines.join("\n"));
         }
-
-
     }
 
     mobSizeChanged(event) {
-
         var currentCount = parseInt(event.target.value);
         var row = event.target.closest(".mobcontroller_row");
         var remainingCreatures = parseInt(row.querySelector(".mobcontroller_creatures_remaining").value);
-        var deadCreatures = parseInt(row.querySelector(".mobcontroller_creatures_dead").value)
+        var deadCreatures = parseInt(row.querySelector(".mobcontroller_creatures_dead").value);
         var oldCount = remainingCreatures + deadCreatures;
-        if (isNaN(currentCount))
-            return event.target.value = oldCount;
+        if (isNaN(currentCount)) return (event.target.value = oldCount);
 
         var hpField = row.querySelector(".hp_field");
         var creature = JSON.parse(row.getAttribute("data-dnd_creature"));
@@ -177,16 +178,15 @@ class MobController {
         row.querySelector(".mobcontroller_creatures_remaining").value = remainingCreatures;
         var index = row.getAttribute("data-dnd_monster_index");
         var recentlyDead = row.getAttribute("data-dead_buffer");
-        console.log("Mob size changed, dead " + recentlyDead + " current count " + remainingCreatures)
+        console.log("Mob size changed, dead " + recentlyDead + " current count " + remainingCreatures);
         this.notifyMapToolMobChanged(index, recentlyDead, remainingCreatures);
         row.setAttribute("data-dead_buffer", "0");
-        var pushEntry = this.loadedMobs.find(x => x.index == index);
+        var pushEntry = this.loadedMobs.find((x) => x.index == index);
         if (pushEntry) pushEntry.mobSize = remainingCreatures;
-
     }
     applyDamage() {
-        var rows = [... this.parentElement.querySelectorAll(".mobcontroller_row")];
-        rows.forEach(row => {
+        var rows = [...this.parentElement.querySelectorAll(".mobcontroller_row")];
+        rows.forEach((row) => {
             var damage = row.querySelector(".dmg_field").value;
             if (!damage) return;
             damage = parseInt(damage);
@@ -194,28 +194,25 @@ class MobController {
             var remaining = parseInt(hpField.value) - damage;
             hpField.value = remaining;
             var index = row.getAttribute("data-dnd_monster_index");
-            if (remaining <= 0)
-                this.kill(index);
+            if (remaining <= 0) this.kill(index);
             this.updateDeadAndRemaing(row);
             row.querySelector(".dmg_field").value = "";
-
         });
     }
 
     kill(index) {
-        var row = this.parentElement.querySelector(".mobcontroller_row[data-dnd_monster_index=\"" + index + "\"]");
+        var row = this.parentElement.querySelector('.mobcontroller_row[data-dnd_monster_index="' + index + '"]');
         row.classList.add("hidden");
-        var arrIndex = this.loadedMobs.indexOf(this.loadedMobs.find(x => x.index === index));
+        var arrIndex = this.loadedMobs.indexOf(this.loadedMobs.find((x) => x.index === index));
         if (arrIndex >= 0) {
             this.loadedMobs.splice(arrIndex, 1);
             this.loadedMobRemoved();
         }
-
     }
 
     roll() {
-        var rows = [... this.parentElement.querySelectorAll(".mobcontroller_row")];
-        rows.forEach(row => {
+        var rows = [...this.parentElement.querySelectorAll(".mobcontroller_row")];
+        rows.forEach((row) => {
             var mod, advantage, disadvantage;
             mod = parseInt(row.getElementsByClassName("attack_field")[0].value);
             advantage = row.getElementsByClassName("combat_loader_advantage")[0].checked;
@@ -242,17 +239,20 @@ class MobController {
                 }
 
                 if (rand == 20) {
-                    result = { damage: this.diceRoller.rollCritFromString(dmgString), hit: "crit" };
-                } else if ((rand + mod) >= ac) {
-                    result = { damage: this.diceRoller.rollFromString(dmgString), hit: "hit" };
+                    result = {
+                        damage: this.diceRoller.rollCritFromString(dmgString),
+                        hit: "crit",
+                    };
+                } else if (rand + mod >= ac) {
+                    result = {
+                        damage: this.diceRoller.rollFromString(dmgString),
+                        hit: "hit",
+                    };
                 } else {
                     result = { damage: 0, hit: "miss" };
                 }
-                if (!isNaN(result.damage))
-                    resultArray.push(result);
-
+                if (!isNaN(result.damage)) resultArray.push(result);
             }
-
 
             var button = row.querySelector(".die_d20");
             button.classList.add("tooltipped");
@@ -261,22 +261,18 @@ class MobController {
             if (resultArray.length == 0) {
                 description = "No creatures remaining or creatures have no attacks";
             } else {
-                rollResultString = resultArray.reduce((a, b) => { return { damage: a.damage + b.damage } }).damage + " damage";
-            
+                rollResultString =
+                    resultArray.reduce((a, b) => {
+                        return { damage: a.damage + b.damage };
+                    }).damage + " damage";
             }
             var tooltip = button.querySelector(".secondary_tooltip");
             tooltip.querySelector(".roll_result_value").innerText = rollResultString || "";
-            tooltip.querySelector(".roll_result_crits").innerText = resultArray.filter(x => x.hit == "crit").length;
-            tooltip.querySelector(".roll_result_hits").innerText = resultArray.filter(x => x.hit == "hit").length;
-            tooltip.querySelector(".roll_result_misses").innerText = resultArray.filter(x => x.hit == "miss").length;
-     
-
-
-
+            tooltip.querySelector(".roll_result_crits").innerText = resultArray.filter((x) => x.hit == "crit").length;
+            tooltip.querySelector(".roll_result_hits").innerText = resultArray.filter((x) => x.hit == "hit").length;
+            tooltip.querySelector(".roll_result_misses").innerText = resultArray.filter((x) => x.hit == "miss").length;
         });
     }
-
-
 
     updateDeadAndRemaing(row) {
         var hpPer = JSON.parse(row.getAttribute("data-dnd_creature")).hit_points;
@@ -286,7 +282,7 @@ class MobController {
         var deadCount = Math.floor((fullHP - currHP) / hpPer);
         if (deadCount > count) deadCount = count;
         var remainingCreatures = count - deadCount;
-        var oldDeadCount = row.querySelector(".mobcontroller_creatures_dead").value
+        var oldDeadCount = row.querySelector(".mobcontroller_creatures_dead").value;
         row.querySelector(".mobcontroller_creatures_dead").value = deadCount;
         row.querySelector(".mobcontroller_creatures_remaining").value = remainingCreatures;
         row.setAttribute("data-dead_buffer", deadCount - oldDeadCount);
@@ -308,14 +304,18 @@ class MobController {
         if (isEmpty) {
             button.setAttribute("title", "Opens the maptool with the loaded mobs\n" + "No mobs are loaded");
         } else {
-            button.setAttribute("title", "Opens the maptool with the loaded mobs\n" + this.loadedMobs.map(x => x.name).reduce((a, b) => a + "\n" + b + "\n"));
+            button.setAttribute("title", "Opens the maptool with the loaded mobs\n" + this.loadedMobs.map((x) => x.name).reduce((a, b) => a + "\n" + b + "\n"));
         }
     }
 
     notifyMapToolMobChanged(rowIndex, dead, remaining) {
-        var existing = this.notifyMobBuffer.find(x => x.rowIndex == rowIndex);
+        var existing = this.notifyMobBuffer.find((x) => x.rowIndex == rowIndex);
         if (!existing) {
-            this.notifyMobBuffer.push({ rowIndex: rowIndex, dead: dead, remaining: remaining });
+            this.notifyMobBuffer.push({
+                rowIndex: rowIndex,
+                dead: dead,
+                remaining: remaining,
+            });
         } else {
             existing.dead = dead;
             existing.remaining = remaining;
@@ -323,42 +323,46 @@ class MobController {
         console.log(this.notifyMobBuffer, existing ? existing : { rowIndex: rowIndex, dead: dead, remaining: remaining });
         clearTimeout(this.notifyTimerMobChanged);
         var controller = this;
-        this.notifyTimerMobChanged = window.setTimeout(
-            function () {
-                window.api.messageWindow("maptoolWindow", "notify-map-tool-mob-changed", JSON.stringify(controller.notifyMobBuffer));
-                controller.notifyMobBuffer.clear();
-            }, 1000
-        );
-
+        this.notifyTimerMobChanged = window.setTimeout(function () {
+            window.api.messageWindow("maptoolWindow", "notify-map-tool-mob-changed", JSON.stringify(controller.notifyMobBuffer));
+            controller.notifyMobBuffer.clear();
+        }, 1000);
     }
 
     notifyMapTool() {
-        window.api.openWindowWithArgs("maptoolWindow", "notify-map-tool-monsters-loaded",JSON.stringify(this.loadedMobs));
-       
+        window.api.openWindowWithArgs("maptoolWindow", "notify-map-tool-monsters-loaded", JSON.stringify(this.loadedMobs));
+
         this.loadedMobs.clear();
         this.updateButton();
     }
 
     mapToolInitialized() {
-        var rowsToAdd = [... this.parentElement.querySelectorAll(".mobcontroller_row:not(.hidden)")];
+        var rowsToAdd = [...this.parentElement.querySelectorAll(".mobcontroller_row:not(.hidden)")];
 
         this.loadedMobs.clear();
 
         this.loadedMobs.clear();
-        rowsToAdd.forEach(row => {
+        rowsToAdd.forEach((row) => {
             var monsterData = JSON.parse(row.getAttribute("data-dnd_creature"));
             var deadCount = row.querySelector(".mobcontroller_creatures_dead").value;
             var index = row.getAttribute("data-dnd_monster_index");
             var mobSize = parseInt(row.querySelector(".mobcontroller_creatures_remaining").value);
             if (isNaN(mobSize)) mobSize = this.DEFAULT_MOB_SIZE;
 
-            this.loadedMobs.push({ name: monsterData.name, size: monsterData.size ? monsterData.size.toLowerCase() : "medium", index: index, isMob: true, mobSize: mobSize, mobCountDead: deadCount, monsterId: monsterData.id })
+            this.loadedMobs.push({
+                name: monsterData.name,
+                size: monsterData.size ? monsterData.size.toLowerCase() : "medium",
+                index: index,
+                isMob: true,
+                mobSize: mobSize,
+                mobCountDead: deadCount,
+                monsterId: monsterData.id,
+            });
         });
-
     }
 
     clear() {
-        var allRows = [... this.parentElement.getElementsByClassName("mobcontroller_row")];
+        var allRows = [...this.parentElement.getElementsByClassName("mobcontroller_row")];
         while (allRows.length > 0) {
             var row = allRows.pop();
             this.notifyMapToolMobChanged(row.getAttribute("data-dnd_monster_index"), 0, 0);
@@ -368,9 +372,4 @@ class MobController {
 
         this.updateButton();
     }
-
-
-
-
-
 }

@@ -50,7 +50,11 @@ var serverNotifier = (function () {
 
     function getBackgroundState() {
         var hw = getCanvasState(backgroundCanvas);
-        return { path: settings.currentBackground, width: hw.width, height: hw.height };
+        return {
+            path: settings.currentBackground,
+            width: hw.width,
+            height: hw.height,
+        };
     }
 
     function getMapEdgeState() {
@@ -59,16 +63,31 @@ var serverNotifier = (function () {
 
     function getForegroundState() {
         var hw = getCanvasState(foregroundCanvas);
-        return { path: settings.currentMap, width: hw.width, height: hw.height, translate: { x: foregroundCanvas.data_transform_x || 0, y: foregroundCanvas.data_transform_y || 0 } };
+        return {
+            path: settings.currentMap,
+            width: hw.width,
+            height: hw.height,
+            translate: {
+                x: foregroundCanvas.data_transform_x || 0,
+                y: foregroundCanvas.data_transform_y || 0,
+            },
+        };
     }
 
     function getOverlayState() {
         var hw = getCanvasState(overlayCanvas);
-        return { path: settings.currentOverlay, width: hw.width, height: hw.height };
+        return {
+            path: settings.currentOverlay,
+            width: hw.width,
+            height: hw.height,
+        };
     }
 
     function getCanvasState(canvas) {
-        return { height: parseFloat(canvas.style.height), width: parseFloat(canvas.style.width) };
+        return {
+            height: parseFloat(canvas.style.height),
+            width: parseFloat(canvas.style.width),
+        };
     }
 
     async function serverTokensChanged() {

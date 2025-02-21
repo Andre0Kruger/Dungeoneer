@@ -1,15 +1,13 @@
 const dataAccess = require("./js/dataaccess");
 
-const { resolve, basename } = require('path');
+const { resolve, basename } = require("path");
 
-const util = require("./js/util")
+const util = require("./js/util");
 async function startImporting(e) {
-
-    var filePath = window.dialog.showOpenDialogSync(
-        {
-            properties: ['openDirectory'],
-            message: "Choose token root folder"
-        });
+    var filePath = window.dialog.showOpenDialogSync({
+        properties: ["openDirectory"],
+        message: "Choose token root folder",
+    });
     if (!filePath || filePath.length == 0) return;
     filePath = filePath[0];
     e.target.classList.add("hidden");
@@ -19,33 +17,30 @@ async function startImporting(e) {
     document.getElementById("loading_title").innerHTML = "Scouring folders...";
     loading.classList.remove("hidden");
     var files = await getFiles(filePath);
-    files = files.filter(x => util.isImage(x));
+    files = files.filter((x) => util.isImage(x));
 
     var foundPaths = [];
     loadingDetail.innerHTML = "";
     document.getElementById("loading_title").innerHTML = "Playing monster match...";
-    dataAccess.getHomebrewAndMonsters(async data => {
-        await data.forEach(async monster => {
-            if (!monster.id || await dataAccess.getTokenPath(monster.id + "0")) {
+    dataAccess.getHomebrewAndMonsters(async (data) => {
+        await data.forEach(async (monster) => {
+            if (!monster.id || (await dataAccess.getTokenPath(monster.id + "0"))) {
                 return;
             }
             var monName = monster.name.trim().toLowerCase();
-            files.forEach(filePath => {
+            files.forEach((filePath) => {
                 var fileName = basename(filePath).deserialize().toLowerCase();
 
-
                 if (fileName.startsWith(monName)) {
-                    var existing = foundPaths.find(x => x.monster.id == monster.id);
+                    var existing = foundPaths.find((x) => x.monster.id == monster.id);
                     if (existing) {
-                        existing.paths.push(filePath)
+                        existing.paths.push(filePath);
                     } else {
                         foundPaths.push({
                             paths: [filePath],
-                            monster: { name: monster.name, id: monster.id }
-                        })
+                            monster: { name: monster.name, id: monster.id },
+                        });
                     }
-
-
                 }
             });
         });
@@ -60,13 +55,14 @@ async function startImporting(e) {
     async function getFiles(dir) {
         loadingDetail.innerHTML = dir;
         const dirents = await readdir(dir, { withFileTypes: true });
-        const files = await Promise.all(dirents.map((dirent) => {
-            const res = resolve(dir, dirent.name);
-            return dirent.isDirectory() ? getFiles(res) : res;
-        }));
+        const files = await Promise.all(
+            dirents.map((dirent) => {
+                const res = resolve(dir, dirent.name);
+                return dirent.isDirectory() ? getFiles(res) : res;
+            }),
+        );
         return Array.prototype.concat(...files);
     }
-
 }
 
 function createTokenElements(foundPaths) {
@@ -77,7 +73,7 @@ function createTokenElements(foundPaths) {
         return;
     }
     var parent = document.getElementById("importer_token_container");
-    foundPaths.forEach(entry => {
+    foundPaths.forEach((entry) => {
         var cont = document.createElement("div");
         cont.classList = "row token_container";
         var lbl = document.createElement("label");
@@ -87,14 +83,13 @@ function createTokenElements(foundPaths) {
         var tokenCont = document.createElement("div");
         tokenCont.classList = "row";
         cont.appendChild(tokenCont);
-        entry.paths.forEach(path => {
+        entry.paths.forEach((path) => {
             tokenCont.appendChild(createImg(path));
         });
         parent.appendChild(cont);
         var loading = document.querySelector(".loading_ele_cont");
         loading.classList.add("hidden");
         document.getElementById("save_tokens_button").classList.remove("hidden");
-
     });
 
     function createImg(path) {
@@ -112,36 +107,33 @@ function createTokenElements(foundPaths) {
         });
         return img;
     }
-
 }
 
 function fileName(path) {
-    return path.substring(path.lastIndexOf("\\") + 1)
+    return path.substring(path.lastIndexOf("\\") + 1);
 }
-
 
 async function saveTokens() {
     document.getElementById("save_tokens_button").classList.add("hidden");
     var allEles = [...document.querySelectorAll("#importer_token_container .token_container")];
 
     var filePaths = [];
-    allEles.forEach(row => {
+    allEles.forEach((row) => {
         var id = row.getAttribute("data-monster_id");
         var index = 0;
-        console.log(row)
+        console.log(row);
         var tokens = [...row.querySelectorAll(".token")];
-        tokens.forEach(token => {
+        tokens.forEach((token) => {
             filePaths.push({
                 filePath: token.getAttribute("src"),
-                savePath: id + index++
+                savePath: id + index++,
             });
         });
     });
 
-
     document.querySelector(".loading_ele_cont").classList.remove("hidden");
     var loadingDetail = document.getElementById("loading_detail");
-    document.getElementById("loading_title").innerHTML = "Saving tokens..."
+    document.getElementById("loading_title").innerHTML = "Saving tokens...";
 
     document.getElementById("importer_token_container").classList.add("hidden");
     for (var i = 0; i < filePaths.length; i++) {
@@ -149,7 +141,6 @@ async function saveTokens() {
         loadingDetail.innerHTML = path.filePath;
         await dataAccess.saveToken(path.savePath, path.filePath, true);
     }
-
 
     document.getElementById("loading_title").innerHTML = "Save successful!";
     loadingDetail.innerHTML = "";

@@ -1,4 +1,4 @@
-// Esse arquivo carrega os JSON (que são gravados na pasta do usuário)
+//* Esse arquivo carrega os JSON (que são gravados na pasta do usuário)
 // TODO talvez alterar a pasta "party" para algo como sessão e talvez criar outra para "local"
 
 var fs = require("fs");
@@ -19,13 +19,22 @@ window.api = {
         return ipcRenderer.sendSync("app-version");
     },
     messageWindow: (windowName, eventName, args) => {
-        return ipcRenderer.send("notify-window", { name: windowName, event: eventName, args: args });
+        return ipcRenderer.send("notify-window", {
+            name: windowName,
+            event: eventName,
+            args: args,
+        });
     },
     openBrowser: (path) => {
         return ipcRenderer.send("open-browser", path);
     },
     openWindowWithArgs: (windowName, eventName, args) => {
-        return ipcRenderer.send("notify-window", { name: windowName, event: eventName, args: args, openIfClosed: true });
+        return ipcRenderer.send("notify-window", {
+            name: windowName,
+            event: eventName,
+            args: args,
+            openIfClosed: true,
+        });
     },
     openExplorer: (path) => {
         return ipcRenderer.send("open-explorer", path);
@@ -110,7 +119,7 @@ module.exports = (function () {
 
         isFirstTimeLoading = false;
         getHomebrewAndMonsters(function (data) {
-            setMetadata(data, () => { });
+            setMetadata(data, () => {});
         });
         function loadGeneratorDefaults() {
             ["names.json", "hook.json"].forEach((p) => {
@@ -148,7 +157,7 @@ module.exports = (function () {
             function (data) {
                 callback((data || { tags: [] }).tags);
             },
-            null
+            null,
         );
     }
 
@@ -158,7 +167,7 @@ module.exports = (function () {
             function (data) {
                 callback((data || { types: [] }).types);
             },
-            null
+            null,
         );
     }
     function setMetadata(data, callback) {
@@ -239,7 +248,10 @@ module.exports = (function () {
     }
 
     function getRandomTables(callback) {
-        return baseGet("randomTables.json", callback, { encounter_sets: {}, tables: {} });
+        return baseGet("randomTables.json", callback, {
+            encounter_sets: {},
+            tables: {},
+        });
     }
 
     function setRandomTables(data, callback) {
@@ -323,7 +335,7 @@ module.exports = (function () {
             if (err) {
                 data = loadDefaultSettings();
                 initializeData();
-                saveSettings(data, () => { });
+                saveSettings(data, () => {});
             } else {
                 data = JSON.parse(data);
                 console.log(err, data);
@@ -361,7 +373,7 @@ module.exports = (function () {
             var pth = allPaths[i];
             var isNew = newPaths.find((x) => x == pth);
             if (isNew) {
-                console.log(tokenId + i)
+                console.log(tokenId + i);
                 await saveToken(tokenId + i, pth);
             } else {
                 await fs.renameSync(pth, getNewTokenSavePath(pth, tokenId + i));
@@ -404,8 +416,7 @@ module.exports = (function () {
         console.log("Saving token", tokenId, "trim:" + trim);
         var savePath = getNewTokenSavePath;
         savePath = pathModule.join(defaultTokenPath, tokenId + ".webp");
-        let buffer = await sharp(currentPath, { animated: true })
-            .resize({ width: baseTokenSize }).webp().toBuffer();
+        let buffer = await sharp(currentPath, { animated: true }).resize({ width: baseTokenSize }).webp().toBuffer();
         if (trim) await sharp(buffer, { animated: true }).trim(0.5).toFile(pathModule.resolve(savePath));
         else await sharp(buffer, { animated: true }).toFile(pathModule.resolve(savePath));
     }
@@ -489,7 +500,7 @@ module.exports = (function () {
                     console.log("Falling back on ", fallbackPath);
                     fs.readFile(fallbackPath, function (err, fallbackData) {
                         if (err) throw err;
-                        baseSetWithFullPath(path, JSON.parse(fallbackData), (err) => { });
+                        baseSetWithFullPath(path, JSON.parse(fallbackData), (err) => {});
                         callback(JSON.parse(fallbackData));
                     });
                 } else {
@@ -538,7 +549,7 @@ module.exports = (function () {
             dirents.map((dirent) => {
                 const res = pathModule.resolve(dir, dirent.name);
                 return dirent.isDirectory() ? getFiles(res) : res;
-            })
+            }),
         );
         return Array.prototype.concat(...files);
     }
@@ -549,7 +560,7 @@ module.exports = (function () {
             (data) => {
                 callback(data);
             },
-            null
+            null,
         );
     }
 
@@ -581,7 +592,7 @@ module.exports = (function () {
                     data = {
                         paths: [],
                         name: libraryName,
-                        pinned: []
+                        pinned: [],
                     };
 
                 var newFiles = files.filter((x) => !data.paths.find((y) => pathModule.basename(x) == pathModule.basename(y)));
@@ -633,7 +644,7 @@ module.exports = (function () {
                 fs.writeFileSync(pathModule.join(destinationFolder, "library_data.json"), JSON.stringify(data));
                 if (workCount == 0) callback();
             },
-            null
+            null,
         );
     }
 
@@ -670,7 +681,7 @@ module.exports = (function () {
                     callback(data);
                 }
             },
-            []
+            [],
         );
     }
     function persistGeneratorData(data, group, callback) {
@@ -720,11 +731,11 @@ module.exports = (function () {
                         callback(globalData);
                     },
                     true,
-                    true
+                    true,
                 );
             },
             true,
-            true
+            true,
         );
     }
 

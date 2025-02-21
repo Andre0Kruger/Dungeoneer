@@ -46,12 +46,12 @@ var effectManager = (function () {
             sfxSelect = createMenu(
                 "add_sfx_dropdown",
                 effectData.filter((x) => !x.isLightEffect),
-                sfxSelect
+                sfxSelect,
             );
             lightSourceSelect = createMenu(
                 "add_light_source_dropdown",
                 effectData.filter((x) => x.isLightEffect),
-                lightSourceSelect
+                lightSourceSelect,
             );
             sfxSelect.onChange = (e) => {
                 selectEffectType(SELECTED_EFFECT_TYPE.sfx);
@@ -168,7 +168,14 @@ var effectManager = (function () {
         effect.style.transform = "rotate(" + deg + "deg)";
         effect.setAttribute("data-deg", deg);
         window.clearTimeout(serverNotifier.timeouts.effect_rotate);
-        serverNotifier.timeouts.effect_rotate = window.setTimeout(() => serverNotifier.notifyServer("effect-rotate", { id: effect.id, rotate: deg }), 600);
+        serverNotifier.timeouts.effect_rotate = window.setTimeout(
+            () =>
+                serverNotifier.notifyServer("effect-rotate", {
+                    id: effect.id,
+                    rotate: deg,
+                }),
+            600,
+        );
     }
 
     function resize(effect, dir) {
@@ -185,7 +192,15 @@ var effectManager = (function () {
         effect.style.width = (mapUnitWidth * cellSize) / UNITS_PER_GRID + "px";
         effect.style.height = (mapUnitHeight * cellSize) / UNITS_PER_GRID + "px";
         window.clearTimeout(serverNotifier.timeouts.effect_resize);
-        serverNotifier.timeouts.effect_resize = window.setTimeout(() => serverNotifier.notifyServer("effect-resize", { id: effect.id, width: mapUnitWidth, height: mapUnitHeight }), 600);
+        serverNotifier.timeouts.effect_resize = window.setTimeout(
+            () =>
+                serverNotifier.notifyServer("effect-resize", {
+                    id: effect.id,
+                    width: mapUnitWidth,
+                    height: mapUnitHeight,
+                }),
+            600,
+        );
     }
 
     function startDeletingEffects(e) {

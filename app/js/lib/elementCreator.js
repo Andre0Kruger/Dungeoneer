@@ -162,7 +162,6 @@ class ElementCreator {
         var text = this.ele("p", "center overlay_text", text);
         //Temp fix for backwards compatibility when map library thumbnails were saved in web instead of png
         img.onerror = () => {
-    
             if (img.src.includes(".png")) return;
             img.src = img.src.replace(".webp", ".png");
         };

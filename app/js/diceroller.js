@@ -1,3 +1,5 @@
+//* Esse arquivo serve pra rolar dados
+
 var diceRoller = (function () {
     function rollForRow(diceRollerRow) {
         inputString = diceRollerRow.getElementsByClassName("diceroller_die_no")[0].value;

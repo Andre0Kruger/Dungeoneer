@@ -13,7 +13,7 @@ const partyModal = (function () {
         tokenEle.onclick = pickPlayerToken;
 
         tokenEle.src = tokenSelector.defaultHeroTokenUrl(id, true);
-     
+
         window.setTimeout(() => {
             var colorInput = row[0].querySelector(".pc_input_background_color");
             colorInput.value = Util.randomHexColor();
@@ -164,7 +164,11 @@ const partyModal = (function () {
             var pcInput = document.getElementById("active_party_input");
             pcInput.value = settings.current_party ? settings.current_party : "Any";
             if (partyInputAwesomeplete) partyInputAwesomeplete.destroy();
-            partyInputAwesomeplete = new Awesomplete(pcInput, { list: parties, autoFirst: true, minChars: 0 });
+            partyInputAwesomeplete = new Awesomplete(pcInput, {
+                list: parties,
+                autoFirst: true,
+                minChars: 0,
+            });
             filterPcRowsBySelectedParty(true);
             var changePartyButtons = [...document.getElementsByClassName("change_party_button")];
             changePartyButtons.forEach((button) => {
@@ -190,7 +194,11 @@ const partyModal = (function () {
         newInp.classList.add("brown_input");
         document.body.appendChild(newDiv);
 
-        newInp.awesomplete = new Awesomplete(newInp, { list: partyInformationList.parties, autoFirst: true, minChars: 0 });
+        newInp.awesomplete = new Awesomplete(newInp, {
+            list: partyInformationList.parties,
+            autoFirst: true,
+            minChars: 0,
+        });
         newInp.addEventListener("awesomplete-selectcomplete", (e) => {
             changePartyHandlerHelper(evt);
         });

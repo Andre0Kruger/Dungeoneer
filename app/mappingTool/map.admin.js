@@ -930,8 +930,8 @@ function createConditionButton(condition) {
         selectedPawns.forEach((pawn) =>
             removePawnCondition(
                 pawn,
-                conditionList.find((x) => x.name == name)
-            )
+                conditionList.find((x) => x.name == name),
+            ),
         );
         e.target.parentNode.removeChild(e.target);
     };

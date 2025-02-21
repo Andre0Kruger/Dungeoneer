@@ -185,12 +185,7 @@ class EncounterModule {
                     return true;
                 });
 
-                if (monsterArray.length == 0)
-                    return callback(
-                        createEncounterReturnError(
-                            "<p>Unable to generate an encounter for this difficulty, as no monsters that fit the criteria are available. This is either because a creature under the specified CR limit does not exist, or that the CR limit is not provided. Make sure that you have some active party members.</p>"
-                        )
-                    );
+                if (monsterArray.length == 0) return callback(createEncounterReturnError("<p>Unable to generate an encounter for this difficulty, as no monsters that fit the criteria are available. This is either because a creature under the specified CR limit does not exist, or that the CR limit is not provided. Make sure that you have some active party members.</p>"));
 
                 console.log(monsterArray);
 
@@ -201,19 +196,19 @@ class EncounterModule {
                     var pickedCrTier = Math.max(...allAvailableCrs.filter((x) => encounterCalculatorTable.xpByCR[x] <= XPCeiling));
                     console.log(
                         "Compatible xp tiers: ",
-                        allAvailableCrs.filter((x) => encounterCalculatorTable.xpByCR[x] <= XPCeiling).map((x) => encounterCalculatorTable.xpByCR[x])
+                        allAvailableCrs.filter((x) => encounterCalculatorTable.xpByCR[x] <= XPCeiling).map((x) => encounterCalculatorTable.xpByCR[x]),
                     );
                     console.log(`Picked xp tier ${encounterCalculatorTable.xpByCR[pickedCrTier]}`);
                     var set = monsterArray.filter((x) => this.parseCRIndex(x.challenge_rating) == pickedCrTier);
                     console.log(
                         pickedCrTier,
                         set,
-                        allAvailableCrs.filter((x) => encounterCalculatorTable.xpByCR[x] <= XPCeiling)
+                        allAvailableCrs.filter((x) => encounterCalculatorTable.xpByCR[x] <= XPCeiling),
                     );
                     pickedMonsters.push(set.pickOne());
                     var totalXp = this.getXpSumForEncounter(
                         pickedMonsters.map((x) => x.challenge_rating),
-                        pcLevels.length
+                        pcLevels.length,
                     ).adjusted;
                     return callback({
                         name: `Solitary ${pickedMonsters[0].type}`,
@@ -239,7 +234,7 @@ class EncounterModule {
 
                     var totalXp = this.getXpSumForEncounter(
                         pickedMonsters.map((x) => x.challenge_rating),
-                        pcLevels.length
+                        pcLevels.length,
                     ).adjusted;
 
                     return callback({
@@ -254,8 +249,7 @@ class EncounterModule {
 
                 if (withLieutenant) {
                     var availablePool = remainingXp / 1.5; //2/3 of xp
-                    if (this.getOptimalCrForCreatureNumber(monsterCount - 1, allAvailableCrs, remainingXp - availablePool) >= 0)
-                        remainingXp -= this.pickCreature(availablePool, monsterArray, pickedMonsters, allAvailableCrs, true);
+                    if (this.getOptimalCrForCreatureNumber(monsterCount - 1, allAvailableCrs, remainingXp - availablePool) >= 0) remainingXp -= this.pickCreature(availablePool, monsterArray, pickedMonsters, allAvailableCrs, true);
                 }
 
                 var remainingCreaturesToAdd = monsterCount;
@@ -276,7 +270,7 @@ class EncounterModule {
 
                 var totalXp = this.getXpSumForEncounter(
                     pickedMonsters.map((x) => x.challenge_rating),
-                    pcLevels.length
+                    pcLevels.length,
                 ).adjusted;
                 return callback({
                     name: "Generated encounter",
@@ -351,10 +345,7 @@ class EncounterModule {
 }
 
 const encounterCalculatorTable = {
-    xpByCR: [
-        10, 25, 50, 100, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000, 20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000,
-        120000, 135000, 155000,
-    ],
+    xpByCR: [10, 25, 50, 100, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900, 7200, 8400, 10000, 11500, 13000, 15000, 18000, 20000, 22000, 25000, 33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000],
 
     table: [
         [25, 50, 75, 100],

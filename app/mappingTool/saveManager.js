@@ -52,7 +52,10 @@ class SaveManager {
         data.mapX = mapContainer.data_transform_x;
         data.mapY = mapContainer.data_transform_y;
         data.bg_scale = mapContainer.data_bg_scale;
-        data.foregroundTranslate = { x: foregroundCanvas.data_transform_x, y: foregroundCanvas.data_transform_y };
+        data.foregroundTranslate = {
+            x: foregroundCanvas.data_transform_x,
+            y: foregroundCanvas.data_transform_y,
+        };
 
         data.segments = fovLighting.getSegments();
 
@@ -180,38 +183,22 @@ class SaveManager {
                 foregroundCanvas.style.transform = `translate(${trsl.x}px, ${trsl.y}px)`;
             }
 
-            if (data.foregroundBase64)
-                data.map = await dataAccess.writeTempFile(
-                    `${getTempName("forground", settings.currentMap)}${pathModule.extname(data.extensions.foreground)}`,
-                    Buffer.from(data.foregroundBase64, "base64")
-                );
+            if (data.foregroundBase64) data.map = await dataAccess.writeTempFile(`${getTempName("forground", settings.currentMap)}${pathModule.extname(data.extensions.foreground)}`, Buffer.from(data.foregroundBase64, "base64"));
             settings.currentMap = data.map;
 
             setMapForeground(data.map + cacheBreaker, data.bg_width);
 
             if (data.map_edge || data.mapEdgeBase64) {
-                if (data.mapEdgeBase64)
-                    data.map_edge = await dataAccess.writeTempFile(
-                        `${getTempName("edge", settings.map_edge_style)}${pathModule.extname(data.extensions.mapEdge)}`,
-                        Buffer.from(data.mapEdgeBase64, "base64")
-                    );
+                if (data.mapEdgeBase64) data.map_edge = await dataAccess.writeTempFile(`${getTempName("edge", settings.map_edge_style)}${pathModule.extname(data.extensions.mapEdge)}`, Buffer.from(data.mapEdgeBase64, "base64"));
                 document.querySelector(".maptool_body").style.backgroundImage = "url('" + data.map_edge + cacheBreaker + "')";
                 settings.map_edge_style = data.map_edge;
             }
 
             fovLighting.drawSegments();
 
-            if (data.backgroundBase64)
-                data.layer2Map = await dataAccess.writeTempFile(
-                    `${getTempName("background", settings.currentBackground)}${pathModule.extname(data.extensions.background)}`,
-                    Buffer.from(data.backgroundBase64, "base64")
-                );
+            if (data.backgroundBase64) data.layer2Map = await dataAccess.writeTempFile(`${getTempName("background", settings.currentBackground)}${pathModule.extname(data.extensions.background)}`, Buffer.from(data.backgroundBase64, "base64"));
 
-            if (data.mapOverlayBase64)
-                data.overlayMap = await dataAccess.writeTempFile(
-                    `${getTempName("overlay", settings.currentOverlay)}${pathModule.extname(data.extensions.overlay)}`,
-                    Buffer.from(data.mapOverlayBase64, "base64")
-                );
+            if (data.mapOverlayBase64) data.overlayMap = await dataAccess.writeTempFile(`${getTempName("overlay", settings.currentOverlay)}${pathModule.extname(data.extensions.overlay)}`, Buffer.from(data.mapOverlayBase64, "base64"));
             settings.currentBackground = data.layer2Map;
             backgroundCanvas.heightToWidthRatio = data.layer2_height_width_ratio || backgroundCanvas.heightToWidthRatio;
             setMapBackground(data.layer2Map ? data.layer2Map + cacheBreaker : null, data.layer2_width);

@@ -19,11 +19,11 @@ h2 {
 }
 
 .brown {
-    background-color: #451A17;
+    background-color: #451a17;
     color: white;
     border-style: solid;
-    border-color: #3F0E0B;
-    border: 1px solid #3F0E0B;
+    border-color: #3f0e0b;
+    border: 1px solid #3f0e0b;
     padding: 1px;
 }
 
@@ -32,16 +32,15 @@ h2 {
     width: 100%;
     justify-content: center;
 }
-#effect_token_container{
-    height:10em;
+#effect_token_container {
+    height: 10em;
 }
 
-#sound_options_rest{
-    margin-top:1em;
-
+#sound_options_rest {
+    margin-top: 1em;
 }
-#sound_options_rest>*{
-    margin:0.25em;
+#sound_options_rest > * {
+    margin: 0.25em;
 }
 .main_column .big_input {
     width: 210px;
@@ -56,43 +55,38 @@ h2 {
 .chosen-container-multi .chosen-choices {
     border-radius: 0;
     background-color: #fff;
-    ;
 }
 
 .token:hover {
-    filter: drop-shadow(0 0 10px white)
+    filter: drop-shadow(0 0 10px white);
 }
 
-.token{
+.token {
     background-size: contain;
     width: 80px;
     cursor: pointer;
     background-repeat: no-repeat;
     height: 80px;
-    border-radius:50%;
+    border-radius: 50%;
     background-position: center;
 }
 
-.success_message{
+.success_message {
     top: 40%;
     left: 40%;
-    z-index:14;
+    z-index: 14;
 }
 
 .chosen-container .chosen-results {
     background-image: none;
 }
-#deleteButton{
+#deleteButton {
     height: 40px;
 }
 #saveButton {
- 
     height: 40px;
     width: 100%;
-
 }
-
-
 
 .save_button_container {
     position: fixed;

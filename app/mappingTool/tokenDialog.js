@@ -20,7 +20,7 @@ class TokenDialog {
                     if (imagePaths == null) return;
                     cls.pawnsSelected(imagePaths);
                 },
-                info
+                info,
             );
         };
 
@@ -79,7 +79,10 @@ class TokenDialog {
             var idx = parseInt(item.sizeIndex);
             var multiplier = !isNaN(idx) ? parseFloat(creaturePossibleSizes.hexes[idx]) : 1;
 
-            elementList.push({ element: tokenCreateResult.base || tokenCreateResult.token, size: multiplier * this.token_size });
+            elementList.push({
+                element: tokenCreateResult.base || tokenCreateResult.token,
+                size: multiplier * this.token_size,
+            });
             var token = tokenCreateResult.token;
             token.onmousedown = (e) => {
                 console.log(e);
@@ -121,7 +124,10 @@ class TokenDialog {
     async selectPlayerToken(player) {
         var path = await dataAccess.getTokenPath(player.id);
         this.playerTokenLoaded = true;
-        this.setExistingPawnInfo({ id: player.id, darkVisionRadius: player.darkvision });
+        this.setExistingPawnInfo({
+            id: player.id,
+            darkVisionRadius: player.darkvision,
+        });
         this.setColor(Util.hexToRGBA(player.color, 0.4));
         this.setSize("medium");
         this.setName(player.character_name);

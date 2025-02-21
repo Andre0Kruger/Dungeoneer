@@ -1,8 +1,6 @@
-
-
-var mathyUtil = function () {
+var mathyUtil = (function () {
     function getNormallyDistributedNum(mean, std_dev) {
-        return mean + (gaussRandom() * std_dev);
+        return mean + gaussRandom() * std_dev;
     }
 
     /*
@@ -17,17 +15,16 @@ var mathyUtil = function () {
         /*if outside interval [0,1] start over*/
         if (r == 0 || r >= 1) return gaussRandom();
 
-        var c = Math.sqrt(-2 * Math.log(r) / r);
+        var c = Math.sqrt((-2 * Math.log(r)) / r);
         return u * c;
 
-        /* todo: optimize this algorithm by caching (v*c) 
+        /* todo: optimize this algorithm by caching (v*c)
          * and returning next time gaussRandom() is called.
          * left out for simplicity */
     }
     return {
         getNormallyDistributedNum: getNormallyDistributedNum,
-    }
-}();
+    };
+})();
 
 module.exports = mathyUtil;
-

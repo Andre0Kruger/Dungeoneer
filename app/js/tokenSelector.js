@@ -278,7 +278,7 @@ class TokenSelector {
                 dirents.map((dirent) => {
                     const res = resolve(dir, dirent.name);
                     return dirent.isDirectory() ? getFiles(res) : res;
-                })
+                }),
             );
             return Array.prototype.concat(...files);
         }
@@ -316,10 +316,10 @@ class TokenSelector {
         modal.container = div;
     }
 
-    defaultHeroTokenUrl(id, cssPath){
+    defaultHeroTokenUrl(id, cssPath) {
         var num = [...id].reduce((x, y) => x + y.charCodeAt(0), 0) % 6;
-        var path = pathModule.join(window.api.getAppPath(),"app", "mappingTool", "tokens", `hero${num}.svg`);
-        if(!cssPath)return path;
+        var path = pathModule.join(window.api.getAppPath(), "app", "mappingTool", "tokens", `hero${num}.svg`);
+        if (!cssPath) return path;
         return path.replaceAll("\\", "/");
     }
 

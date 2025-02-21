@@ -1,23 +1,22 @@
-
 const BaseModule = require("./BaseModule");
 
- class Resize extends BaseModule {
+class Resize extends BaseModule {
     onCreate = () => {
         // track resize handles
         this.boxes = [];
 
         // add 4 resize handles
-        this.addBox('nwse-resize'); // top left
-        this.addBox('nesw-resize'); // top right
-        this.addBox('nwse-resize'); // bottom right
-        this.addBox('nesw-resize'); // bottom left
+        this.addBox("nwse-resize"); // top left
+        this.addBox("nesw-resize"); // top right
+        this.addBox("nwse-resize"); // bottom right
+        this.addBox("nesw-resize"); // bottom left
 
         this.positionBoxes();
     };
 
     onDestroy = () => {
         // reset drag handle cursors
-        this.setCursor('');
+        this.setCursor("");
     };
 
     positionBoxes = () => {
@@ -26,10 +25,10 @@ const BaseModule = require("./BaseModule");
 
         // set the top and left for each drag handle
         [
-            { left: handleXOffset, top: handleYOffset },        // top left
-            { right: handleXOffset, top: handleYOffset },       // top right
-            { right: handleXOffset, bottom: handleYOffset },    // bottom right
-            { left: handleXOffset, bottom: handleYOffset },     // bottom left
+            { left: handleXOffset, top: handleYOffset }, // top left
+            { right: handleXOffset, top: handleYOffset }, // top right
+            { right: handleXOffset, bottom: handleYOffset }, // bottom right
+            { left: handleXOffset, bottom: handleYOffset }, // bottom left
         ].forEach((pos, idx) => {
             Object.assign(this.boxes[idx].style, pos);
         });
@@ -37,7 +36,7 @@ const BaseModule = require("./BaseModule");
 
     addBox = (cursor) => {
         // create div element for resize handle
-        const box = document.createElement('div');
+        const box = document.createElement("div");
 
         // Star with the specified styles
         Object.assign(box.style, this.options.handleStyles);
@@ -48,7 +47,7 @@ const BaseModule = require("./BaseModule");
         box.style.height = `${this.options.handleStyles.height}px`;
 
         // listen for mousedown on each box
-        box.addEventListener('mousedown', this.handleMousedown, false);
+        box.addEventListener("mousedown", this.handleMousedown, false);
         // add drag handle to document
         this.overlay.appendChild(box);
         // keep track of drag handle
@@ -65,16 +64,16 @@ const BaseModule = require("./BaseModule");
         // set the proper cursor everywhere
         this.setCursor(this.dragBox.style.cursor);
         // listen for movement and mouseup
-        document.addEventListener('mousemove', this.handleDrag, false);
-        document.addEventListener('mouseup', this.handleMouseup, false);
+        document.addEventListener("mousemove", this.handleDrag, false);
+        document.addEventListener("mouseup", this.handleMouseup, false);
     };
 
     handleMouseup = () => {
         // reset cursor everywhere
-        this.setCursor('');
+        this.setCursor("");
         // stop listening for movement and mouseup
-        document.removeEventListener('mousemove', this.handleDrag);
-        document.removeEventListener('mouseup', this.handleMouseup);
+        document.removeEventListener("mousemove", this.handleDrag);
+        document.removeEventListener("mouseup", this.handleMouseup);
     };
 
     handleDrag = (evt) => {
@@ -95,11 +94,8 @@ const BaseModule = require("./BaseModule");
     };
 
     setCursor = (value) => {
-        [
-            document.body,
-            this.img,
-        ].forEach((el) => {
-            el.style.cursor = value;   // eslint-disable-line no-param-reassign
+        [document.body, this.img].forEach((el) => {
+            el.style.cursor = value; // eslint-disable-line no-param-reassign
         });
     };
 }

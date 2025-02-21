@@ -11,14 +11,13 @@
     margin: auto;
 }
 
-
-#loading_title, #nodata_text{
-    margin:auto;
-    font-size:1.5em;
-
+#loading_title,
+#nodata_text {
+    margin: auto;
+    font-size: 1.5em;
 }
 
-.loading_ele_cont{
+.loading_ele_cont {
     margin: auto;
     text-align: center;
 }
@@ -50,7 +49,7 @@ main {
 }
 
 .token:hover {
-    filter: drop-shadow(0 0 10px white)
+    filter: drop-shadow(0 0 10px white);
 }
 
 .token {

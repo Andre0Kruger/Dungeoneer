@@ -18,7 +18,7 @@ var initiative = (function () {
             (ele) =>
                 (ele.onfocus = function (e) {
                     e.target.select();
-                })
+                }),
         );
 
         [...document.querySelectorAll(".initiativeNode")].forEach(
@@ -44,7 +44,7 @@ var initiative = (function () {
                             document.removeEventListener("click", hidePopupOnClick);
                         }
                     }
-                })
+                }),
         );
     }
 
@@ -186,8 +186,8 @@ var initiative = (function () {
 
         if (isMainWindow) {
             publishEvent({ empty: true });
-        }else{
-             bar.classList.add("hidden");
+        } else {
+            bar.classList.add("hidden");
         }
     }
     function hide() {
@@ -332,10 +332,16 @@ var initiative = (function () {
             var name = document.querySelector(".initiative_node_active>.initiative_name_node").innerHTML;
             var pc = partyArray.find((x) => x.name == name);
             if (!pc) {
-                window.api.messageWindow("maptoolWindow", "next-player-round", { player: null, darkvision: false });
+                window.api.messageWindow("maptoolWindow", "next-player-round", {
+                    player: null,
+                    darkvision: false,
+                });
                 return;
             }
-            window.api.messageWindow("maptoolWindow", "next-player-round", { player: name, darkvision: parseInt(pc.darkvision) > 0 });
+            window.api.messageWindow("maptoolWindow", "next-player-round", {
+                player: name,
+                darkvision: parseInt(pc.darkvision) > 0,
+            });
         }
     }
 

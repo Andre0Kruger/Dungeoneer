@@ -1,3 +1,5 @@
+//* Esse arquivo parece que serve como um utilitário, tem coisas para a parte de combate, mas também tem fonte para coisas de party, notepad, etc
+
 var loadedMonster = {};
 var loadedMonsterQueue = [];
 
@@ -71,7 +73,11 @@ ipcRenderer.on("notify-maptool-selection-changed", function (evt, args) {
     combatLoader.setSelectedRows(args.selected);
 });
 function notifyMapToolConditionsChanged(index, conditions, isPlayer) {
-    window.api.messageWindow("maptoolWindow", "condition-list-changed", { index: index, conditions: conditions, isPlayer: isPlayer });
+    window.api.messageWindow("maptoolWindow", "condition-list-changed", {
+        index: index,
+        conditions: conditions,
+        isPlayer: isPlayer,
+    });
 }
 
 ipcRenderer.on("condition-list-changed", function (evt, args) {
@@ -83,7 +89,7 @@ ipcRenderer.on("condition-list-changed", function (evt, args) {
             combatRow,
             conditionList.map((x) => {
                 return { condition: x.toLowerCase() };
-            })
+            }),
         );
     } else {
         //Is player
@@ -111,7 +117,12 @@ ipcRenderer.on("maptool-initialized", function (evt, arg) {
         var monsterId = allRows[i].getAttribute("data-dnd_monster_id");
         if (name == "" || allRows[i].classList.contains("hidden")) continue;
 
-        loadedMonsterQueue.push({ monsterId: monsterId, name: name, size: size, index: index });
+        loadedMonsterQueue.push({
+            monsterId: monsterId,
+            name: name,
+            size: size,
+            index: index,
+        });
     }
     loadedMonsterQueue.update();
     if (mobController) mobController.mapToolInitialized();
@@ -176,7 +187,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".pcnode:nth-child(1)").onmousedown = pcNodeMouseDownHandler;
     dataAccess.getConditions(function (conditions) {
         var pcNodeInp = document.getElementById("add_pc_node_condition_input");
-        new Awesomplete(pcNodeInp, { list: conditions.map((x) => x.name), minChars: 0, autoFirst: true });
+        new Awesomplete(pcNodeInp, {
+            list: conditions.map((x) => x.name),
+            minChars: 0,
+            autoFirst: true,
+        });
         pcNodeInp.addEventListener("awesomplete-selectcomplete", function (e) {
             addPcNodeCondition(selectedPcNode, e.text.value);
             document.getElementById("add_pc_node_condition_input").classList.add("hidden");
@@ -197,6 +212,12 @@ document.addEventListener("DOMContentLoaded", function () {
     var settingsEl = document.querySelector("#homebrew--button");
     settingsEl.addEventListener("click", function () {
         ipcRenderer.send("open-database-window");
+    });
+
+    // Ferramenta de cálculo de caminhada e distância
+    var settingsEl = document.querySelector("#walk-calculator--button");
+    settingsEl.addEventListener("click", function () {
+        ipcRenderer.send("open-walk-calculator-window");
     });
 
     //Tengir maptool takka
@@ -384,7 +405,12 @@ var autofill = (function () {
                     arr.sort();
 
                     monsterNames = arr;
-                    autoFillInputLists.push(new Awesomplete(document.getElementById("searchbar"), { list: monsterNames, autoFirst: true }));
+                    autoFillInputLists.push(
+                        new Awesomplete(document.getElementById("searchbar"), {
+                            list: monsterNames,
+                            autoFirst: true,
+                        }),
+                    );
                     document.getElementById("searchbar").addEventListener("awesomplete-selectcomplete", function (e) {
                         search("monsters", true, "");
                     });
@@ -405,7 +431,13 @@ var autofill = (function () {
             });
             arr.sort();
             conditionNames = arr;
-            autoFillInputLists.push(new Awesomplete(document.getElementById("searchbarconditions"), { list: conditionNames, autoFirst: true, minChars: 0 }));
+            autoFillInputLists.push(
+                new Awesomplete(document.getElementById("searchbarconditions"), {
+                    list: conditionNames,
+                    autoFirst: true,
+                    minChars: 0,
+                }),
+            );
             document.getElementById("searchbarconditions").addEventListener("awesomplete-selectcomplete", function (e) {
                 search("conditions", true, null);
             });
@@ -419,7 +451,12 @@ var autofill = (function () {
             });
             arr.sort();
             itemNames = arr;
-            autoFillInputLists.push(new Awesomplete(document.getElementById("searchbaritems"), { list: itemNames, autoFirst: true }));
+            autoFillInputLists.push(
+                new Awesomplete(document.getElementById("searchbaritems"), {
+                    list: itemNames,
+                    autoFirst: true,
+                }),
+            );
             document.getElementById("searchbaritems").addEventListener("awesomplete-selectcomplete", function (e) {
                 search("items", true, null);
             });
@@ -433,7 +470,12 @@ var autofill = (function () {
             });
             arr.sort();
             spellNames = arr;
-            autoFillInputLists.push(new Awesomplete(document.getElementById("searchbarspells"), { list: spellNames, autoFirst: true }));
+            autoFillInputLists.push(
+                new Awesomplete(document.getElementById("searchbarspells"), {
+                    list: spellNames,
+                    autoFirst: true,
+                }),
+            );
             document.getElementById("searchbarspells").addEventListener("awesomplete-selectcomplete", function (e) {
                 search("spells", true, null);
             });
@@ -449,7 +491,13 @@ var autofill = (function () {
                 randData = randData.tables;
                 Object.keys(randData).forEach((tbl) => arr.push(["Random table: " + tbl.deserialize(), tbl.deserialize()]));
 
-                autoFillInputLists.push(new Awesomplete(document.getElementById("searchbartables"), { list: arr, autoFirst: true, minChars: 0 }));
+                autoFillInputLists.push(
+                    new Awesomplete(document.getElementById("searchbartables"), {
+                        list: arr,
+                        autoFirst: true,
+                        minChars: 0,
+                    }),
+                );
                 document.getElementById("searchbartables").addEventListener("awesomplete-selectcomplete", function (e) {
                     search("tables", true, null);
                 });
@@ -626,8 +674,7 @@ function loadParty() {
             $(".pscontainer").addClass("hidden");
         }
         combatLoader.notifyPartyArrayUpdated();
-        if (oldParty == null || partyArray.find((x) => !oldParty.find((y) => y.id == x.id)) || oldParty.find((x) => !partyArray.find((y) => y.id == x.id)))
-            window.api.messageWindow("maptoolWindow", "notify-party-array-updated");
+        if (oldParty == null || partyArray.find((x) => !oldParty.find((y) => y.id == x.id)) || oldParty.find((x) => !partyArray.find((y) => y.id == x.id))) window.api.messageWindow("maptoolWindow", "notify-party-array-updated");
     });
 }
 
@@ -1188,7 +1235,7 @@ function getRandomTableEntry(event) {
         {
             scrollTop: $(".randomly_chosen_table_row").offset().top - 20,
         },
-        600
+        600,
     );
 }
 

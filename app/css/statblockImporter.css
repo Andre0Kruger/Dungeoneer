@@ -10,8 +10,7 @@
     width: 40em;
     margin: auto;
 }
-.statblock_select:hover::after{
-
+.statblock_select:hover::after {
     position: absolute;
     content: "Use statblock";
     transform: translate(50%, 50%);
@@ -23,21 +22,21 @@
     padding: 0.25em;
     border-radius: var(--rounded-corners);
 }
-.statblock_select:hover{
-    opacity:0.8;
-    position:relative;
+.statblock_select:hover {
+    opacity: 0.8;
+    position: relative;
     cursor: pointer;
 }
-#loading_title, #nodata_text{
-    margin:auto;
-    font-size:1.5em;
-
+#loading_title,
+#nodata_text {
+    margin: auto;
+    font-size: 1.5em;
 }
-.pageframe{
+.pageframe {
     padding: 1.5em !important;
-    margin:2em;
+    margin: 2em;
 }
-.loading_ele_cont{
+.loading_ele_cont {
     margin: auto;
     text-align: center;
 }

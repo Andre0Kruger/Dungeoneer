@@ -1,23 +1,28 @@
-
-#form, #data-container, div, #container, #data, body {
-    background-image:url("img/phbbg.png") !important;
-    background-size:cover;
+#form,
+#data-container,
+div,
+#container,
+#data,
+body {
+    background-image: url("img/phbbg.png") !important;
+    background-size: cover;
     background-color: transparent;
     font-family: var(--basic-font);
 }
-#cancel, #ok{
-
-  color: white;
-  font-family: "Impact, fantasy";
-  font-size: 14px;
-  background-color: #58180D;
-  background-size: contain;
-  background-repeat: no-repeat;
-  transition: background-color 300ms;
-  border: none;
-  border-bottom: 2px solid rgb(61, 17, 9);
+#cancel,
+#ok {
+    color: white;
+    font-family: "Impact, fantasy";
+    font-size: 14px;
+    background-color: #58180d;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: background-color 300ms;
+    border: none;
+    border-bottom: 2px solid rgb(61, 17, 9);
 }
 
-#cancel:hover, #ok:hover {
-  background-color:#DE3C2B;
+#cancel:hover,
+#ok:hover {
+    background-color: #de3c2b;
 }

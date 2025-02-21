@@ -3,7 +3,7 @@ const BaseModule = require("./BaseModule");
 class DisplaySize extends BaseModule {
     onCreate = () => {
         // Create the container to hold the size display
-        this.display = document.createElement('div');
+        this.display = document.createElement("div");
 
         // Apply styles
         Object.assign(this.display.style, this.options.displayStyles);
@@ -20,39 +20,34 @@ class DisplaySize extends BaseModule {
         }
 
         const size = this.getCurrentSize();
-        this.display.innerHTML = size.join(' &times; ');
+        this.display.innerHTML = size.join(" &times; ");
         if (size[0] > 120 && size[1] > 30) {
             // position on top of image
             Object.assign(this.display.style, {
-                right: '4px',
-                bottom: '4px',
-                left: 'auto',
+                right: "4px",
+                bottom: "4px",
+                left: "auto",
             });
-        }
-        else if (this.img.style.float == 'right') {
-			// position off bottom left
+        } else if (this.img.style.float == "right") {
+            // position off bottom left
             const dispRect = this.display.getBoundingClientRect();
             Object.assign(this.display.style, {
-                right: 'auto',
+                right: "auto",
                 bottom: `-${dispRect.height + 4}px`,
                 left: `-${dispRect.width + 4}px`,
             });
-        }
-        else {
+        } else {
             // position off bottom right
             const dispRect = this.display.getBoundingClientRect();
             Object.assign(this.display.style, {
                 right: `-${dispRect.width + 4}px`,
                 bottom: `-${dispRect.height + 4}px`,
-                left: 'auto',
+                left: "auto",
             });
         }
     };
 
-    getCurrentSize = () => [
-        this.img.width,
-        Math.round((this.img.width / this.img.naturalWidth) * this.img.naturalHeight),
-    ];
+    getCurrentSize = () => [this.img.width, Math.round((this.img.width / this.img.naturalWidth) * this.img.naturalHeight)];
 }
 
 module.exports = DisplaySize;

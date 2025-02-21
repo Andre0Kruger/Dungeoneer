@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 nextLevel(
                     lastAttribute ? obj[lastAttribute] : obj,
                     [...dom.childNodes].find((x) => x.classList.contains("treeview_nested")),
-                    attr
+                    attr,
                 );
             } else {
                 var attrList = [...dom.childNodes].filter((x) => x.classList.contains("treeview_attribute")).map((x) => x.firstChild.innerHTML);
@@ -243,7 +243,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateCreatureNamesetsList(names) {
         console.log(Object.keys(names));
         var input = document.getElementById("creature_namesets_name_input");
-        new Awesomplete(input, { list: Object.keys(names), autoFirst: true, minChars: 0, maxItems: 120 });
+        new Awesomplete(input, {
+            list: Object.keys(names),
+            autoFirst: true,
+            minChars: 0,
+            maxItems: 120,
+        });
         input.addEventListener("awesomplete-selectcomplete", function (e) {
             dataAccess.getGeneratorData((data) => {
                 var creature = data.names[e.target.value];
@@ -261,7 +266,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateCreatureTypeList(creatureTypes) {
         var input = document.getElementById("creature_type_name_input");
-        new Awesomplete(input, { list: creatureTypes, autoFirst: true, minChars: 0, maxItems: 120 });
+        new Awesomplete(input, {
+            list: creatureTypes,
+            autoFirst: true,
+            minChars: 0,
+            maxItems: 120,
+        });
         input.addEventListener("keydown", function (e) {
             if (e.keyCode == 13) populateCreatureTreeView(e);
         });
@@ -451,7 +461,12 @@ function updateRandomTableNames() {
         for (var i = 0; i < randomTableNames.length; i++) {
             randomTableNames[i] = unSerialize(randomTableNames[i]);
         }
-        var aws = new Awesomplete(input, { list: randomTableNames, autoFirst: true, minChars: 0, maxItems: 120 });
+        var aws = new Awesomplete(input, {
+            list: randomTableNames,
+            autoFirst: true,
+            minChars: 0,
+            maxItems: 120,
+        });
         input.addEventListener("awesomplete-selectcomplete", function (e) {
             populateRandomTable();
         });
@@ -477,7 +492,11 @@ function updateEncounterSetNames() {
         for (var i = 0; i < encounterSetNames.length; i++) {
             encounterSetNames[i] = unSerialize(encounterSetNames[i]);
         }
-        encounterSetAwesomplete = new Awesomplete(input, { list: encounterSetNames, autoFirst: true, minChars: 0 });
+        encounterSetAwesomplete = new Awesomplete(input, {
+            list: encounterSetNames,
+            autoFirst: true,
+            minChars: 0,
+        });
         input.addEventListener("awesomplete-selectcomplete", function (e) {
             loadEncounterSet();
         });
@@ -560,7 +579,14 @@ function createEnconterSetTableRow(value) {
     newNode.appendChild(newInput);
     currentRow.appendChild(newNode);
 
-    encounterSetAwesompletes.push(new Awesomplete(newInput, { list: awesompleteSelectionSetMonsters, autoFirst: true, minChars: 1, maxItems: 50 }));
+    encounterSetAwesompletes.push(
+        new Awesomplete(newInput, {
+            list: awesompleteSelectionSetMonsters,
+            autoFirst: true,
+            minChars: 1,
+            maxItems: 50,
+        }),
+    );
     newInput.addEventListener("awesomplete-selectcomplete", (e) => {
         var inputs = [...document.getElementsByClassName("encounter_set_add_creature")];
         var emptyInput;
@@ -797,7 +823,12 @@ function generateRandomTable(jsonObj) {
     }
 }
 function createTableNameAwesomeplete(newInput) {
-    new Awesomplete(newInput, { list: randomTableNames, autoFirst: true, minChars: 0, maxItems: 50 });
+    new Awesomplete(newInput, {
+        list: randomTableNames,
+        autoFirst: true,
+        minChars: 0,
+        maxItems: 50,
+    });
 }
 
 function deleteRandomTable() {
@@ -1021,16 +1052,16 @@ function getEmbeddable(element, callback) {
                                     styleCont = rootCont + commonCss + styleCont + snowCss;
                                     callback(`<link rel = 'stylesheet' url <div>${element.outerHTML} <style>${styleCont}</style> </div>`);
                                 },
-                                false
+                                false,
                             );
                         },
-                        false
+                        false,
                     );
                 },
-                false
+                false,
             );
         },
-        false
+        false,
     );
 }
 
@@ -1050,20 +1081,7 @@ function updateScrollList() {
             if (element.description.length > SPELL_DESCRIPTION_MAX) {
                 element.description = element.description.slice(0, SPELL_DESCRIPTION_MAX) + "...";
             }
-            newItem.description =
-                "**" +
-                (element.classes != null ? joinAndCapitalize(element.classes) : "") +
-                " scroll, " +
-                rarity +
-                "**" +
-                "\n" +
-                "Save DC " +
-                saveDc +
-                ". Attack bonus " +
-                attackBonus +
-                "." +
-                "\n" +
-                element.description;
+            newItem.description = "**" + (element.classes != null ? joinAndCapitalize(element.classes) : "") + " scroll, " + rarity + "**" + "\n" + "Save DC " + saveDc + ". Attack bonus " + attackBonus + "." + "\n" + element.description;
             newItem.source = "SRD";
             scrollItems.push(newItem);
         });

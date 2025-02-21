@@ -1,3 +1,5 @@
+//* Esse arquivo serve pra carregar os JSON que são o "banco" da ferramenta
+
 var tab = "monsters",
     tabElementNameSuffix = "monsters";
 const { ipcRenderer } = require("electron");
@@ -63,7 +65,7 @@ $(document).ready(function () {
     document.querySelector("#trim_token_checkbox").addEventListener("change", function (evt) {
         dataAccess.getSettings(function (settings) {
             settings.token_trim_enabled = document.querySelector("#trim_token_checkbox").checked;
-            dataAccess.saveSettings(settings, () => { });
+            dataAccess.saveSettings(settings, () => {});
         });
     });
 
@@ -186,24 +188,59 @@ $(document).ready(function () {
     };
 });
 
-function addMonsterNameChanged() { }
+function addMonsterNameChanged() {}
 
 var monster_subtype_awesomplete;
 function populateDropdowns() {
-    new Awesomplete(document.getElementById("item_rarity_input"), { list: itemRarityValues, autoFirst: true, minChars: 0, sort: false });
-    new Awesomplete(document.getElementById("item_type_input"), { list: itemTypeValues, autoFirst: true, minChars: 0, sort: false });
-    new Awesomplete(document.getElementById("addmonster_alignment"), { list: constants.defaultCreatureAlignments, autoFirst: true, minChars: 0, sort: false });
-    new Awesomplete(document.getElementById("addmonster_type"), { list: constants.defaultCreatureTypes, autoFirst: true, minChars: 0, sort: false });
+    new Awesomplete(document.getElementById("item_rarity_input"), {
+        list: itemRarityValues,
+        autoFirst: true,
+        minChars: 0,
+        sort: false,
+    });
+    new Awesomplete(document.getElementById("item_type_input"), {
+        list: itemTypeValues,
+        autoFirst: true,
+        minChars: 0,
+        sort: false,
+    });
+    new Awesomplete(document.getElementById("addmonster_alignment"), {
+        list: constants.defaultCreatureAlignments,
+        autoFirst: true,
+        minChars: 0,
+        sort: false,
+    });
+    new Awesomplete(document.getElementById("addmonster_type"), {
+        list: constants.defaultCreatureTypes,
+        autoFirst: true,
+        minChars: 0,
+        sort: false,
+    });
     document.getElementById("addmonster_type").addEventListener("awesomplete-selectcomplete", function (e) {
         if (monster_subtype_awesomplete != null) monster_subtype_awesomplete.destroy();
         var type = document.getElementById("addmonster_type").value?.toLowerCase();
         if (!type || !constants.defaultCreatureSubTypes[type]) return;
 
-        monster_subtype_awesomplete = new Awesomplete(document.getElementById("addmonster_subtype"), { list: constants.defaultCreatureSubTypes[type], autoFirst: true, minChars: 0, sort: false });
+        monster_subtype_awesomplete = new Awesomplete(document.getElementById("addmonster_subtype"), {
+            list: constants.defaultCreatureSubTypes[type],
+            autoFirst: true,
+            minChars: 0,
+            sort: false,
+        });
     });
-    new Awesomplete(document.getElementById("addmonster_ac_source"), { list: getArmorTypes(), autoFirst: true, minChars: 0, sort: false });
+    new Awesomplete(document.getElementById("addmonster_ac_source"), {
+        list: getArmorTypes(),
+        autoFirst: true,
+        minChars: 0,
+        sort: false,
+    });
     document.getElementById("addmonster_ac_source").addEventListener("awesomplete-selectcomplete", armorSelected);
-    new Awesomplete(document.getElementById("spell_school_input"), { list: constants.spellSchools, autoFirst: true, minChars: 0, sort: false });
+    new Awesomplete(document.getElementById("spell_school_input"), {
+        list: constants.spellSchools,
+        autoFirst: true,
+        minChars: 0,
+        sort: false,
+    });
 
     //Items
     var classList = new Set();
@@ -211,7 +248,12 @@ function populateDropdowns() {
         var prefix = Util.IsVowel(classStr.substring(0, 1)) ? "an" : "a";
         classList.add(`by ${prefix} ${classStr}`);
     });
-    new Awesomplete(document.getElementById("additem_requires_attunement_by"), { list: [...classList], autoFirst: true, minChars: 0, sort: false });
+    new Awesomplete(document.getElementById("additem_requires_attunement_by"), {
+        list: [...classList],
+        autoFirst: true,
+        minChars: 0,
+        sort: false,
+    });
     document.getElementById("additem_requires_attunement_by").addEventListener("awesomplete-selectcomplete", function (e) {
         var checkbox = document.getElementById("additem_requires_attunement");
         if (!checkbox.checked) checkbox.checked = true;
@@ -221,7 +263,12 @@ function populateDropdowns() {
     creaturePossibleSizes.sizes.forEach(function (size) {
         sizeList.push(size.substring(0, 1).toUpperCase() + size.substring(1));
     });
-    new Awesomplete(document.getElementsByClassName("addmonster_size")[0], { list: sizeList, autoFirst: true, minChars: 0, sort: false });
+    new Awesomplete(document.getElementsByClassName("addmonster_size")[0], {
+        list: sizeList,
+        autoFirst: true,
+        minChars: 0,
+        sort: false,
+    });
 
     document.getElementById("homebrewAC").oninput = (evt) => {
         evt.target.setAttribute("data-user_override", true);
@@ -281,14 +328,28 @@ function populateAddableFieldDropdowns() {
     var specialAbilityList = constants.specialAbilities.map((x) => x.name);
     $(".special_ability_column .specialjsonAttribute").off("awesomplete-selectcomplete");
     [...document.querySelectorAll(".special_ability_column .specialjsonAttribute")].forEach((input) => {
-        specialAbilityAndActionAwesompletes.push(new Awesomplete(input, { list: specialAbilityList, autoFirst: true, minChars: 0, sort: false }));
+        specialAbilityAndActionAwesompletes.push(
+            new Awesomplete(input, {
+                list: specialAbilityList,
+                autoFirst: true,
+                minChars: 0,
+                sort: false,
+            }),
+        );
     });
     $(".special_ability_column .specialjsonAttribute").on("awesomplete-selectcomplete", specialAbilitySelected);
 
     $(".action_row .action_name").off("awesomplete-selectcomplete");
     var weaponList = constants.weapons.map((x) => x.name);
     [...document.querySelectorAll(".action_row .action_name")].forEach((input) => {
-        specialAbilityAndActionAwesompletes.push(new Awesomplete(input, { list: weaponList, autoFirst: true, minChars: 2, sort: false }));
+        specialAbilityAndActionAwesompletes.push(
+            new Awesomplete(input, {
+                list: weaponList,
+                autoFirst: true,
+                minChars: 2,
+                sort: false,
+            }),
+        );
     });
     $(".action_row .action_name").on("awesomplete-selectcomplete", actionSelected);
     function actionSelected(evt) {
@@ -450,12 +511,15 @@ function populateSpellClassDropdown() {
                     });
                     var dropDownValues = [];
                     uniqueValues.forEach(function (className) {
-                        dropDownValues.push({ value: className, name: className.substring(0, 1).toUpperCase() + className.substring(1) });
+                        dropDownValues.push({
+                            value: className,
+                            name: className.substring(0, 1).toUpperCase() + className.substring(1),
+                        });
                     });
-                    postMessage(dropDownValues.sort((a, b) => a.value == b.value ? 0 : a.value < b.value ? -1 : 1));
+                    postMessage(dropDownValues.sort((a, b) => (a.value == b.value ? 0 : a.value < b.value ? -1 : 1)));
                     self.close();
                 },
-                false
+                false,
             );
         });
         worker.postMessage(data);
@@ -476,7 +540,11 @@ function populateSpellClassDropdown() {
             });
 
             [...document.getElementsByClassName("jsonValueClasses")].forEach(function (el) {
-                new Awesomplete(el, { list: classList, autoFirst: true, minChars: 0 });
+                new Awesomplete(el, {
+                    list: classList,
+                    autoFirst: true,
+                    minChars: 0,
+                });
             });
         };
     });
@@ -745,7 +813,12 @@ function fetchTagList() {
         if (monsterTags.awesomplete) return;
         monsterTags.list = tags;
         var input = document.querySelector("#addmonster_tag_input");
-        monsterTags.awesomplete = new Awesomplete(input, { list: tags, autoFirst: true, minChars: 0, sort: false });
+        monsterTags.awesomplete = new Awesomplete(input, {
+            list: tags,
+            autoFirst: true,
+            minChars: 0,
+            sort: false,
+        });
         input.addEventListener("awesomplete-selectcomplete", function (e) {
             console.log(e);
             addNpcTag(e.text.value);
@@ -786,14 +859,7 @@ function displayAddEncounterMonsterList() {
             filtered = monsterMasterList.filter((entry) => {
                 var ret = true;
                 for (var i = 0; i < filterTextSplt.length; i++) {
-                    if (
-                        !(
-                            notNullAndContains(entry.name, filterTextSplt[i]) ||
-                            notNullAndContains(entry.type, filterTextSplt[i]) ||
-                            notNullAndExactMatch(entry.challenge_rating + "", filterTextSplt[i])
-                        )
-                    )
-                        ret = false;
+                    if (!(notNullAndContains(entry.name, filterTextSplt[i]) || notNullAndContains(entry.type, filterTextSplt[i]) || notNullAndExactMatch(entry.challenge_rating + "", filterTextSplt[i]))) ret = false;
                 }
                 return ret;
             });
@@ -980,7 +1046,7 @@ function deleteFromHomebrew(toRemove) {
         if (index == -1) return false;
         data.splice(index, 1);
         if (tab == "monsters" || tab == "homebrew") {
-            console.log(toRemove)
+            console.log(toRemove);
             var tokens = await dataAccess.getTokenPaths(toRemove);
             tokens.forEach((token) => {
                 fs.unlink(token, function (err) {
@@ -1100,7 +1166,7 @@ function calculateSuggestedCR() {
     document.querySelector("#defensive_cr_row .hit_points_cr_calculator").innerHTML = `${res.dcr_entry.minHP}-${res.dcr_entry.maxHP}`;
 }
 
-function updateOffensiveChallengeRatingValues() { }
+function updateOffensiveChallengeRatingValues() {}
 
 function calculateEncounterDifficulty() {
     console.log("Calculating encounter diff");
@@ -1296,7 +1362,7 @@ async function addTokensToCurrentMonster() {
                 createToken(path);
             });
         },
-        { name: name, type: type }
+        { name: name, type: type },
     );
 }
 
@@ -1691,32 +1757,7 @@ function editObject(dataObject, letter) {
         var specialAttrFields = document.querySelectorAll(".specialjsonAttribute");
         var specialFields = document.querySelectorAll(".specialjsonValue");
 
-        [
-            "name",
-            "size",
-            "description",
-            "type",
-            "hit_dice",
-            "speed",
-            "strength",
-            "dexterity",
-            "constitution",
-            "intelligence",
-            "wisdom",
-            "charisma",
-            "senses",
-            "languages",
-            "challenge_rating",
-            "subtype",
-            "alignment",
-            "armor_class",
-            "hit_points",
-            "skills",
-            "damage_resistances",
-            "damage_immunities",
-            "condition_immunities",
-            "damage_vulnerabilities",
-        ].forEach((entry) => fillFieldAndRemoveFromObject(entry, keyArray, valueArray));
+        ["name", "size", "description", "type", "hit_dice", "speed", "strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma", "senses", "languages", "challenge_rating", "subtype", "alignment", "armor_class", "hit_points", "skills", "damage_resistances", "damage_immunities", "condition_immunities", "damage_vulnerabilities"].forEach((entry) => fillFieldAndRemoveFromObject(entry, keyArray, valueArray));
 
         document.querySelector("#addmonster_unique").checked = removeFromObject("unique", keyArray, valueArray);
 
@@ -2167,7 +2208,9 @@ function saveHomebrew() {
     }
 
     readDataFunction((data) => {
-        var thingyToSave = data.find((x) => x.id == currentEntry?.id) || { id: null };
+        var thingyToSave = data.find((x) => x.id == currentEntry?.id) || {
+            id: null,
+        };
 
         var attribute;
 
@@ -2355,7 +2398,7 @@ function saveHomebrew() {
                 tokens.map((x) => x.getAttribute("data-file_path")),
                 newTokens.map((x) => x.getAttribute("data-file_path")),
                 tokenRemoveQueue,
-                document.querySelector("#trim_token_checkbox")?.checked || false
+                document.querySelector("#trim_token_checkbox")?.checked || false,
             );
 
             currentEntry = null;

@@ -1,4 +1,4 @@
-var consoleStates = function () {
+var consoleStates = (function () {
     var diceRolling = false;
     var lookup = false;
     var generating = false;
@@ -10,13 +10,13 @@ var consoleStates = function () {
     return {
         clearAll: clearAll,
         diceRolling: diceRolling,
-        lookup: lookup
-    }
-}();
+        lookup: lookup,
+    };
+})();
 
 document.addEventListener("keyup", function (event) {
     if (event.keyCode == 220) {
-        console.log(event.keyCode)
+        console.log(event.keyCode);
         commandConsole.openOrCloseConsole();
         consoleStates.clearAll();
         consoleBuffer = "";
@@ -27,9 +27,7 @@ document.addEventListener("keyup", function (event) {
     //Enter - execute
     if (event.keyCode == 13) {
         if (consoleBuffer != "") {
-            commandConsole.hasOperator() ?
-             commandConsole.setOperatorParam(consoleBuffer) :
-             commandConsole.setParam(consoleBuffer);
+            commandConsole.hasOperator() ? commandConsole.setOperatorParam(consoleBuffer) : commandConsole.setParam(consoleBuffer);
         }
         consoleBuffer = "";
         commandConsole.execute();
@@ -43,11 +41,11 @@ document.addEventListener("keyup", function (event) {
     }
 
     if (consoleStates.diceRolling) {
-        return handleDiceRollerCommands(event.keyCode)
+        return handleDiceRollerCommands(event.keyCode);
     } else if (consoleStates.lookup) {
-        return handleLookupCommands(event.keyCode)
+        return handleLookupCommands(event.keyCode);
     } else if (consoleStates.generating) {
-        return handleGenerateCommands(event.keyCode)
+        return handleGenerateCommands(event.keyCode);
     }
 
     //R - Roll
@@ -57,14 +55,13 @@ document.addEventListener("keyup", function (event) {
         consoleBuffer = "";
         commandConsole.setFunction(commandConsole.roll, "ROLL ");
         consoleStates.diceRolling = true;
-
     }
     //S - search
     else if (event.keyCode == 83) {
         commandConsole.clear();
         consoleStates.clearAll();
         consoleBuffer = "";
-        commandConsole.setFunction(commandConsole.search, "SEARCH ")
+        commandConsole.setFunction(commandConsole.search, "SEARCH ");
         consoleStates.lookup = true;
     }
 
@@ -73,7 +70,7 @@ document.addEventListener("keyup", function (event) {
         commandConsole.clear();
         consoleStates.clearAll();
         consoleBuffer = "";
-        commandConsole.setFunction(commandConsole.generate, "GENERATE ")
+        commandConsole.setFunction(commandConsole.generate, "GENERATE ");
         consoleStates.generating = true;
     }
 
@@ -81,71 +78,66 @@ document.addEventListener("keyup", function (event) {
         if (commandConsole.getState() == 1) {
             //T --tavern name
             if (keyCode == 84) {
-                commandConsole.setParam("tavern")
+                commandConsole.setParam("tavern");
                 commandConsole.updateInput(" TAVERN NAME");
                 // C - celestial name
             } else if (keyCode == 67) {
-                commandConsole.setParam("celestial")
+                commandConsole.setParam("celestial");
                 commandConsole.updateInput(" CELESTIAL NAME");
                 //F -- fiend
             } else if (keyCode == 70) {
-                commandConsole.setParam("fey")
+                commandConsole.setParam("fey");
                 commandConsole.updateInput(" FEY NAME");
             } else if (keyCode == 68) {
-                commandConsole.setParam("fiend")
+                commandConsole.setParam("fiend");
                 commandConsole.updateInput(" DEMONIC NAME");
                 //N -- NAME
             } else if (keyCode == 78) {
-                commandConsole.setParam("anglo")
+                commandConsole.setParam("anglo");
                 commandConsole.updateInput(" NAME");
             }
         } else if (commandConsole.getState() == 2 && commandConsole.getParamCount() == 1 && commandConsole.getParam(0) != "tavern") {
             //F - female
             if (keyCode == 70) {
                 commandConsole.updateInput(" FEMALE");
-                commandConsole.setParam("female")
+                commandConsole.setParam("female");
             }
         }
     }
-
 
     function handleLookupCommands(keyCode) {
         if (commandConsole.getState() != 1) return;
         //S - spells
         if (keyCode == 83) {
-            commandConsole.setParam("spells")
+            commandConsole.setParam("spells");
             commandConsole.updateInput(" SPELLS");
 
             //M - monsters
         } else if (keyCode == 77) {
-            commandConsole.setParam("monsters")
+            commandConsole.setParam("monsters");
             commandConsole.updateInput(" MONSTERS");
         }
         //I - items
         else if (keyCode == 73) {
-            commandConsole.setParam("items")
+            commandConsole.setParam("items");
             commandConsole.updateInput(" ITEMS");
         }
         //C - conditions
         else if (keyCode == 67) {
-            commandConsole.setParam("conditions")
+            commandConsole.setParam("conditions");
             commandConsole.updateInput(" CONDITIONS");
         }
-
-
     }
     function handleDiceRollerCommands(keyCode) {
         //d = 68 = dice
         if (keyCode == 68 && commandConsole.getParamCount() == 0) {
             if (commandConsole.getState() != 2 && consoleBuffer == "") return;
-            commandConsole.setParam(parseInt(consoleBuffer))
-            commandConsole.setOperator(-1, " d")
+            commandConsole.setParam(parseInt(consoleBuffer));
+            commandConsole.setOperator(-1, " d");
             consoleBuffer = "";
-        }   //49-57
+        } //49-57
         // 97-105
-        else if ((keyCode >= 48 && keyCode <= 57) ||
-            (keyCode >= 96 && keyCode <= 105) &&
-            (commandConsole.getState() == 1)) {
+        else if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105 && commandConsole.getState() == 1)) {
             var numValue;
             if (keyCode >= 48 && keyCode <= 57) {
                 numValue = keyCode - 48;
@@ -154,42 +146,43 @@ document.addEventListener("keyup", function (event) {
                 numValue = keyCode - 96;
             }
             consoleBuffer += numValue;
-            commandConsole.updateInput(numValue)
+            commandConsole.updateInput(numValue);
             //+ operator
         } else if (keyCode == 107 || keyCode == 191) {
-            commandConsole.setOperator(addTwo, " + ")
-            if(consoleBuffer != ""){
+            commandConsole.setOperator(addTwo, " + ");
+            if (consoleBuffer != "") {
                 commandConsole.setParam(consoleBuffer);
                 consoleBuffer = "";
             }
             //- operator
-        }else if (keyCode == 109 || keyCode == 219) {
-            commandConsole.setOperator(subtractTwo, " - ")
-            if(consoleBuffer != ""){
+        } else if (keyCode == 109 || keyCode == 219) {
+            commandConsole.setOperator(subtractTwo, " - ");
+            if (consoleBuffer != "") {
                 commandConsole.setParam(consoleBuffer);
                 consoleBuffer = "";
             }
         }
     }
 
-    function subtractTwo(a,b){
-        return parseInt(a)-parseInt(b);
+    function subtractTwo(a, b) {
+        return parseInt(a) - parseInt(b);
     }
 
-    function addTwo(a, b){
-        return parseInt(a)+parseInt(b);
+    function addTwo(a, b) {
+        return parseInt(a) + parseInt(b);
     }
 });
 var consoleBuffer = "";
 
-var commandConsole = function () {
+var commandConsole = (function () {
     var inputElement = document.getElementById("command_console_input");
     var commandFunction, operatorFunction;
     var state = 0; // 0 rdy for function, 1 rdy param, 2 rdy operator
     var consoleIsOpen = false;
     var params = [];
     var operatorParams = [];
-    var paramIndex = 0, opParamIndex = 0;
+    var paramIndex = 0,
+        opParamIndex = 0;
     var actions = [];
     function openOrCloseConsole() {
         consoleIsOpen = !consoleIsOpen;
@@ -210,12 +203,12 @@ var commandConsole = function () {
     }
     function setParam(param) {
         state = 2;
- 
+
         params[paramIndex++] = param;
     }
-    function setOperatorParam(param){
+    function setOperatorParam(param) {
         state = 3;
- 
+
         operatorParams[opParamIndex++] = param;
     }
     function setOperator(value, display) {
@@ -228,18 +221,17 @@ var commandConsole = function () {
 
     function getParam(index) {
         return params[index];
-
     }
 
-    function hasOperator(){
-        return operatorFunction!=null;
+    function hasOperator() {
+        return operatorFunction != null;
     }
 
     function getParamCount() {
         return params.length;
     }
     function setFunction(func, funcName) {
-        actions.push(funcName)
+        actions.push(funcName);
         clear();
         state = 1;
         commandFunction = func;
@@ -272,7 +264,6 @@ var commandConsole = function () {
         inputElement.value = cmdText;
     }
     function clear() {
-
         params = [];
         operatorParams = [];
         operatorFunction = null;
@@ -285,11 +276,10 @@ var commandConsole = function () {
     }
 
     function removeLast() {
-        removeLast
+        removeLast;
     }
 
     function generate(key, gender) {
-
         fs.readFile(generatorResourcePath + "names.json", function read(err, data) {
             if (err) {
                 throw err;
@@ -297,19 +287,17 @@ var commandConsole = function () {
             data = JSON.parse(data);
             var result;
             if (key == "tavern") {
-                result = generateTavernName(data)
+                result = generateTavernName(data);
             } else {
                 var dataset = gender == "female" ? data.names[key].female : data.names[key].male;
                 result = pickX(dataset, 1) + " " + pickX(data.names[key].lastnames, 1);
             }
             clearLastResult();
             inputElement.value += " = " + result;
-
         });
     }
 
     function search(searchKey) {
-
         var searchBar;
 
         if (searchKey == "spells") {
@@ -328,14 +316,9 @@ var commandConsole = function () {
             });
         }
 
-
-
         searchBar.focus();
         searchBar.select();
         openOrCloseConsole();
-
-
-
     }
     function roll(times, sides) {
         if (sides == null) return times;
@@ -364,15 +347,17 @@ var commandConsole = function () {
         generate: generate,
         clear: clear,
         getParamCount: getParamCount,
-        hasOperator:hasOperator,
-        setOperatorParam:setOperatorParam
-
-    }
-}();
+        hasOperator: hasOperator,
+        setOperatorParam: setOperatorParam,
+    };
+})();
 
 function generateTavernName(data) {
     var tavernName = data.tavern.name.template.pickOne();
-    var tavernOwner = { firstname: data.names.anglo.male.pickOne(), lastname: data.names.anglo.lastnames.pickOne() };
+    var tavernOwner = {
+        firstname: data.names.anglo.male.pickOne(),
+        lastname: data.names.anglo.lastnames.pickOne(),
+    };
 
     var ending = "'s";
     if (tavernOwner.firstname.substring(tavernOwner.firstname.length - 1) === "s") ending = "'";

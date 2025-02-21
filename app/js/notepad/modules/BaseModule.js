@@ -1,4 +1,4 @@
- class BaseModule {
+class BaseModule {
     constructor(resizer) {
         this.overlay = resizer.overlay;
         this.img = resizer.img;
