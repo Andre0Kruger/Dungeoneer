@@ -1,4 +1,5 @@
-
+// Esse arquivo parece que serve pra procurar a CR do monstro com base em dados estatísticos de dano e tals
+// E tbm tem uma função que retorna a tabela de CRs
 
 module.exports = function () {
     function getAverage(offensive, defensive) {
@@ -6,14 +7,14 @@ module.exports = function () {
         var check = Math.floor((offensive + defensive) / 2);
         if (check > 0) return check;
         check = (offensive + defensive) / 2;
- 
+
         var values = [0, 0.125, 0.25, 0.5];
         var diff;
         for (var i = 0; i < values.length; i++) {
             var diffCurrent = Math.abs(check - values[i]);
             if (check <= [values[i]]) {
 
-        
+
                 if (diff && diffCurrent >= diff) {
                     return values[i - 1];
                 } else {
@@ -32,7 +33,7 @@ module.exports = function () {
 
         if (!predictedDmg) predictedDmg = 1;
         if (!hp) hp = 1;
-        if (!attackBonus) attackBonus =  0;
+        if (!attackBonus) attackBonus = 0;
         if (!ac) ac = 12;
 
         console.log(predictedDmg, hp, attackBonus, ac)
@@ -41,7 +42,7 @@ module.exports = function () {
         //     var found = table.find(x => x.minHP <= hp && x.maxHP >= hp);
         //     if (!found) found = table[table.length - 1]
         //     dCr = found
-          
+
         //     var found = table.find(x => x.minDmg <= predictedDmg && x.maxDmg >= predictedDmg);
         //     if (!found) found = table[table.length - 1]
         //     oCr = found;
@@ -49,59 +50,58 @@ module.exports = function () {
         //     expectedCR = getAverage(eval(oCr.cr, dCr.cr));
         // }
 
-  
+
         var found = table.find(x => x.minHP <= hp && x.maxHP >= hp);
         console.log(found)
         var acDiff = ac - found.ac;
-        var adjust = Math.floor(Math.abs(acDiff)/2);
-        if(acDiff < 0)adjust *= -1;
+        var adjust = Math.floor(Math.abs(acDiff) / 2);
+        if (acDiff < 0) adjust *= -1;
         console.log(`Adjust defensive CR by ${adjust}`);
         var index = table.indexOf(found);
-        index+=adjust;
-        if(index < 0)index = 0;
-        if(index >= table.length)index = table.length-1;
-      
-        var dCr= table[index];
+        index += adjust;
+        if (index < 0) index = 0;
+        if (index >= table.length) index = table.length - 1;
+
+        var dCr = table[index];
 
         found = table.find(x => x.minDmg <= predictedDmg && x.maxDmg >= predictedDmg);
         console.log(found);
         //Check if save DC is higher and should be used
         var useSave = false;
-        if(saveDc){
-            var atkEntry = table.find(x=> x.attack_bonus >= attackBonus);
-            var dcEntry = table.find(x=> x.saveDc >= saveDc);
-            if(dcEntry){
-                if(!atkEntry || eval(dcEntry.cr) > eval(atkEntry.cr)){
+        if (saveDc) {
+            var atkEntry = table.find(x => x.attack_bonus >= attackBonus);
+            var dcEntry = table.find(x => x.saveDc >= saveDc);
+            if (dcEntry) {
+                if (!atkEntry || eval(dcEntry.cr) > eval(atkEntry.cr)) {
                     useSave = true;
                 }
-  
+
             }
         }
         var attkDiff = useSave ? saveDc - found.saveDc : attackBonus - found.attack_bonus;
-        adjust = Math.floor(Math.abs(attkDiff)/2);
-        if(attkDiff < 0)adjust *= -1;
+        adjust = Math.floor(Math.abs(attkDiff) / 2);
+        if (attkDiff < 0) adjust *= -1;
         console.log(`Adjust offensive CR by ${adjust}`);
 
         index = table.indexOf(found);
-        index+=adjust;
-        if(index < 0)index = 0;
-        if(index >= table.length)index = table.length-1;
-      
-        var oCr=  table[index];
+        index += adjust;
+        if (index < 0) index = 0;
+        if (index >= table.length) index = table.length - 1;
+
+        var oCr = table[index];
 
         var cr = getAverage(eval(oCr.cr) || 0, eval(dCr.cr) || 0);
-        cr = table.find(x=> eval(x.cr) == cr);
+        cr = table.find(x => eval(x.cr) == cr);
         return { cr_entry: cr, dcr_entry: dCr, ocr_entry: oCr }
     }
 
-    function getTableForCrValue(crValue)
-    {
-        return table.find(x=> x.cr== crValue);
+    function getTableForCrValue(crValue) {
+        return table.find(x => x.cr == crValue);
     }
 
     var table = [
 
-        { cr: "0", minHP: 1, maxHP: 6, profBonus: 2, ac: 13, ac_string:"≤13", minDmg: 0, maxDmg: 1, saveDc: 13, saveDc_string : "≤13", attack_bonus: 3, attack_bonus_string : "≤3" },
+        { cr: "0", minHP: 1, maxHP: 6, profBonus: 2, ac: 13, ac_string: "≤13", minDmg: 0, maxDmg: 1, saveDc: 13, saveDc_string: "≤13", attack_bonus: 3, attack_bonus_string: "≤3" },
         { cr: "1/8", minHP: 7, maxHP: 35, profBonus: 2, ac: 13, minDmg: 2, maxDmg: 3, saveDc: 13, attack_bonus: 3 },
         { cr: "1/4", minHP: 36, maxHP: 49, profBonus: 2, ac: 13, minDmg: 4, maxDmg: 5, saveDc: 13, attack_bonus: 3 },
         { cr: "1/2", minHP: 50, maxHP: 70, profBonus: 2, ac: 13, minDmg: 6, maxDmg: 8, saveDc: 13, attack_bonus: 3 },
@@ -139,7 +139,7 @@ module.exports = function () {
 
     return {
         calculateCR: calculateCR,
-        getTableForCrValue:getTableForCrValue
+        getTableForCrValue: getTableForCrValue
     }
 
 }();

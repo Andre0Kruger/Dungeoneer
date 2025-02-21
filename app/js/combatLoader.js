@@ -938,7 +938,7 @@ var combatLoader = (function () {
         });
     }
 
-    function saveOrCondition() {}
+    function saveOrCondition() { }
 
     function saveVsSpell(evt) {
         if (hideAllPopups) hideAllPopups();
@@ -1081,7 +1081,7 @@ var combatLoader = (function () {
                 currentSortFunction = function (a, b) {
                     if (parseInt(getRowIndex(a)) == parseInt(getRowIndex(b))) return 0;
                     var currIndex = parseInt(currentInitiativeActorName.substring(currentInitiativeActorName.lastIndexOf("(") + 1, currentInitiativeActorName.lastIndexOf(")")));
-              
+
                     if (parseInt(getRowIndex(a)) == currIndex) return -1;
                     if (parseInt(getRowIndex(b)) == currIndex) return 1;
                     return 0;

@@ -1,3 +1,6 @@
+// Esse arquivo carrega os JSON (que são gravados na pasta do usuário)
+// TODO talvez alterar a pasta "party" para algo como sessão e talvez criar outra para "local"
+
 var fs = require("fs");
 const { ipcRenderer } = require("electron");
 const { readdir, writeFile, readFile } = require("fs").promises;
@@ -107,7 +110,7 @@ module.exports = (function () {
 
         isFirstTimeLoading = false;
         getHomebrewAndMonsters(function (data) {
-            setMetadata(data, () => {});
+            setMetadata(data, () => { });
         });
         function loadGeneratorDefaults() {
             ["names.json", "hook.json"].forEach((p) => {
@@ -320,7 +323,7 @@ module.exports = (function () {
             if (err) {
                 data = loadDefaultSettings();
                 initializeData();
-                saveSettings(data, () => {});
+                saveSettings(data, () => { });
             } else {
                 data = JSON.parse(data);
                 console.log(err, data);
@@ -353,12 +356,12 @@ module.exports = (function () {
         allPaths = allPaths.filter((x) => !removePaths.find((y) => y == x));
         allPaths.sort();
         console.log(allPaths);
-        
+
         for (var i = allPaths.length - 1; i >= 0; i--) {
             var pth = allPaths[i];
             var isNew = newPaths.find((x) => x == pth);
             if (isNew) {
-                console.log(tokenId +i)
+                console.log(tokenId + i)
                 await saveToken(tokenId + i, pth);
             } else {
                 await fs.renameSync(pth, getNewTokenSavePath(pth, tokenId + i));
@@ -402,7 +405,7 @@ module.exports = (function () {
         var savePath = getNewTokenSavePath;
         savePath = pathModule.join(defaultTokenPath, tokenId + ".webp");
         let buffer = await sharp(currentPath, { animated: true })
-            .resize({width: baseTokenSize}).webp().toBuffer();
+            .resize({ width: baseTokenSize }).webp().toBuffer();
         if (trim) await sharp(buffer, { animated: true }).trim(0.5).toFile(pathModule.resolve(savePath));
         else await sharp(buffer, { animated: true }).toFile(pathModule.resolve(savePath));
     }
@@ -486,7 +489,7 @@ module.exports = (function () {
                     console.log("Falling back on ", fallbackPath);
                     fs.readFile(fallbackPath, function (err, fallbackData) {
                         if (err) throw err;
-                        baseSetWithFullPath(path, JSON.parse(fallbackData), (err) => {});
+                        baseSetWithFullPath(path, JSON.parse(fallbackData), (err) => { });
                         callback(JSON.parse(fallbackData));
                     });
                 } else {

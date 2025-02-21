@@ -63,7 +63,7 @@ $(document).ready(function () {
     document.querySelector("#trim_token_checkbox").addEventListener("change", function (evt) {
         dataAccess.getSettings(function (settings) {
             settings.token_trim_enabled = document.querySelector("#trim_token_checkbox").checked;
-            dataAccess.saveSettings(settings, () => {});
+            dataAccess.saveSettings(settings, () => { });
         });
     });
 
@@ -186,7 +186,7 @@ $(document).ready(function () {
     };
 });
 
-function addMonsterNameChanged() {}
+function addMonsterNameChanged() { }
 
 var monster_subtype_awesomplete;
 function populateDropdowns() {
@@ -1100,7 +1100,7 @@ function calculateSuggestedCR() {
     document.querySelector("#defensive_cr_row .hit_points_cr_calculator").innerHTML = `${res.dcr_entry.minHP}-${res.dcr_entry.maxHP}`;
 }
 
-function updateOffensiveChallengeRatingValues() {}
+function updateOffensiveChallengeRatingValues() { }
 
 function calculateEncounterDifficulty() {
     console.log("Calculating encounter diff");
