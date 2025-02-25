@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -44,7 +44,9 @@
                                         <a class="button_style" id="save_map_button" href="#" title="Saves the map in the current state, excluding tokens.">Save map (ctrl+s)</a>
                                     </li>
                                     <li>
-                                        <a class="button_style" id="load_map_button" href="#" title="Loads an earlier map in the same state, excluding tokens.">Load map (ctrl+o)</a>
+                                        <a class="button_style" id="load_map_button" href="#" title="Loads an earlier map in the same state, excluding tokens."
+                                            >Load map (ctrl+o)</a
+                                        >
                                     </li>
                                 </ul>
                             </li>
@@ -129,7 +131,10 @@
 
                                             <div class="menu_seperator"></div>
                                             <li>
-                                                <a class="button_style toggle_button background_slide_button toggle_bob_animation_button" toggled="false" onclick="overlayLoop.toggleBobAnimation()"
+                                                <a
+                                                    class="button_style toggle_button background_slide_button toggle_bob_animation_button"
+                                                    toggled="false"
+                                                    onclick="overlayLoop.toggleBobAnimation()"
                                                     >Sway overlay</a
                                                 >
                                             </li>
@@ -243,7 +248,10 @@
 
                                             <div class="menu_seperator"></div>
                                             <li>
-                                                <a class="button_style toggle_button background_slide_button toggle_bob_animation_button" toggled="false" onclick="backgroundLoop.toggleBobAnimation()"
+                                                <a
+                                                    class="button_style toggle_button background_slide_button toggle_bob_animation_button"
+                                                    toggled="false"
+                                                    onclick="backgroundLoop.toggleBobAnimation()"
                                                     >Sway background</a
                                                 >
                                             </li>
@@ -264,7 +272,9 @@
                                     </li>
 
                                     <li>
-                                        <a class="button_style" id="backdrop_window_button" href="#" title="Launches a backdrop window, useful if running in transparent mode.">Plain image window</a>
+                                        <a class="button_style" id="backdrop_window_button" href="#" title="Launches a backdrop window, useful if running in transparent mode."
+                                            >Plain image window</a
+                                        >
                                     </li>
                                     <li>
                                         <a class="button_style" href="#">Map edge</a>
@@ -308,7 +318,12 @@
                                         </select>
                                     </li>
                                     <li>
-                                        <a class="toggle_button button_style" toggled="false" title="Current viewer has darkvision" id="active_viewer_button" onclick="switchActiveViewer()"
+                                        <a
+                                            class="toggle_button button_style"
+                                            toggled="false"
+                                            title="Current viewer has darkvision"
+                                            id="active_viewer_button"
+                                            onclick="switchActiveViewer()"
                                             >Darkvision</a
                                         >
                                     </li>
@@ -347,12 +362,19 @@
                                         >
                                     </li>
                                     <li>
-                                        <a class="button_style" title="Import walls from dungeondraft map" onclick="fovLighting.importDungeondraftWalls()">Import Dungeondraft walls</a>
+                                        <a class="button_style" title="Import walls from dungeondraft map" onclick="fovLighting.importDungeondraftWalls()"
+                                            >Import Dungeondraft walls</a
+                                        >
                                     </li>
                                     <div class="menu_seperator"></div>
 
                                     <li>
-                                        <a class="toggle_button button_style" id="delete_segments_button" toggled="false" title="Delete visibility blocking segments" onclick="toggleDeleteSegments()"
+                                        <a
+                                            class="toggle_button button_style"
+                                            id="delete_segments_button"
+                                            toggled="false"
+                                            title="Delete visibility blocking segments"
+                                            onclick="toggleDeleteSegments()"
                                             >Delete walls</a
                                         >
                                     </li>
@@ -361,10 +383,38 @@
                         </ul>
                     </div>
 
-                    <button title="Line measurement tool" class="toggle_button button_style toolbox_button" id="line_tool" toggleGroup="1" toggled="false" onclick="setTool(event, this,0)"></button>
-                    <button title="Cone measurement tool" class="toggle_button button_style toolbox_button" id="cone_tool" toggleGroup="1" toggled="false" onclick="setTool(event,this,1)"></button>
-                    <button title="Sphere measurement tool" class="toggle_button button_style toolbox_button" id="sphere_tool" toggleGroup="1" toggled="false" onclick="setTool(event,this,2)"></button>
-                    <button title="Cube measurement tool" class="toggle_button button_style toolbox_button" id="cube_tool" toggleGroup="1" toggled="false" onclick="setTool(event,this,3)"></button>
+                    <button
+                        title="Line measurement tool"
+                        class="toggle_button button_style toolbox_button"
+                        id="line_tool"
+                        toggleGroup="1"
+                        toggled="false"
+                        onclick="setTool(event, this,0)"
+                    ></button>
+                    <button
+                        title="Cone measurement tool"
+                        class="toggle_button button_style toolbox_button"
+                        id="cone_tool"
+                        toggleGroup="1"
+                        toggled="false"
+                        onclick="setTool(event,this,1)"
+                    ></button>
+                    <button
+                        title="Sphere measurement tool"
+                        class="toggle_button button_style toolbox_button"
+                        id="sphere_tool"
+                        toggleGroup="1"
+                        toggled="false"
+                        onclick="setTool(event,this,2)"
+                    ></button>
+                    <button
+                        title="Cube measurement tool"
+                        class="toggle_button button_style toolbox_button"
+                        id="cube_tool"
+                        toggleGroup="1"
+                        toggled="false"
+                        onclick="setTool(event,this,3)"
+                    ></button>
                     <button
                         title="Rectangle measurement tool"
                         class="toggle_button button_style toolbox_button"
@@ -553,8 +603,22 @@
             </div>
             <div id="popup_menu_add_effect" class="hidden column">
                 <div class="row">
-                    <button class="button button_style toggle_button effect_action_button" id="move_effects_button" toggled="false" onclick="effectManager.startMovingEffects(event)">Edit</button>
-                    <button class="button button_style toggle_button effect_action_button" id="delete_effects_button" toggled="false" onclick="effectManager.startDeletingEffects()">Delete</button>
+                    <button
+                        class="button button_style toggle_button effect_action_button"
+                        id="move_effects_button"
+                        toggled="false"
+                        onclick="effectManager.startMovingEffects(event)"
+                    >
+                        Edit
+                    </button>
+                    <button
+                        class="button button_style toggle_button effect_action_button"
+                        id="delete_effects_button"
+                        toggled="false"
+                        onclick="effectManager.startDeletingEffects()"
+                    >
+                        Delete
+                    </button>
                 </div>
                 <div class="column sidebar_section" id="sidebar_sfx">
                     <h2 class="interactive_header">Effect</h2>
