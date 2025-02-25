@@ -97,7 +97,7 @@ if (process.platform === "darwin") {
         {
             label: "Speech",
             submenu: [{ role: "startspeaking" }, { role: "stopspeaking" }],
-        },
+        }
     );
 
     // Window menu
@@ -191,7 +191,7 @@ ipcMain.on("open-server-window", function () {
             pathname: path.join(__dirname, "/app/server.html"),
             protocol: "file:",
             slashes: true,
-        }),
+        })
     );
 
     serverWindow.on("closed", function () {
@@ -223,7 +223,7 @@ function createBaseWindow(options, fileToLoad, whenOpenedFn, show = true, preloa
             pathname: path.join(__dirname, fileToLoad),
             protocol: "file:",
             slashes: true,
-        }),
+        })
     );
     if (whenOpenedFn) {
         window.on("ready-to-show", () => {
@@ -527,7 +527,7 @@ function createWindow() {
             protocol: "file:",
 
             slashes: true,
-        }),
+        })
     );
     loading.show();
 }
@@ -602,7 +602,7 @@ function createMapToolWindow(callback) {
                     nodeIntegration: true,
                     contextIsolation: false,
                 },
-            }),
+            })
         );
     });
 }

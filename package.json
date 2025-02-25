@@ -6,11 +6,11 @@
     "main": "main.js",
     "scripts": {
         "start": "electron .",
+        "debug": "npx electronmon .",
         "build": "electron-builder build --win --publish never",
         "buildlinux": "electron-builder build --linux --publish never",
         "buildmac": "electron-builder build --mac --publish never",
         "deploy": "electron-builder build --win --publish always",
-        "browsersync": "browser-sync start --server --files \"./*\"",
         "format": "prettier --write . && eslint --fix ."
     },
     "author": {
@@ -36,6 +36,11 @@
         "slim-select": "^1.27.0",
         "turndown": "^5.0.3",
         "uniqid": "^5.2.0"
+    },
+    "electronmon": {
+        "patterns": [
+            "!app/css/theme.css*"
+        ]
     },
     "postinstall": "electron-builder install-app-deps",
     "repository": {
