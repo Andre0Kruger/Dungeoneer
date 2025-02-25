@@ -1,0 +1,12 @@
+# EditorConfig for Visual Studio Code and Prettier
+
+# Para todos os arquivos
+[*]
+indent_style = space   # Usa espaços (não tabs)
+indent_size = 4        # Usa 4 espaços para indentação
+end_of_line = lf       # Usa LF como final de linha
+charset = utf-8        # Usa UTF-8 como codificação de caracteres
+trim_trailing_whitespace = true   # Remove espaços em branco no final das linhas
+insert_final_newline = true       # Garante que todos os arquivos terminem com uma nova linha
+
+# Caso você tenha algum arquivo específico com configurações diferentes, pode configurá-los aqui.

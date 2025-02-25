@@ -1,0 +1,13 @@
+{
+    "printWidth": 180,
+    "tabWidth": 4,
+    "useTabs": false,
+    "overrides": [
+        {
+            "files": "*.js",
+            "options": {
+                "printWidth": 500
+            }
+        }
+    ]
+}
