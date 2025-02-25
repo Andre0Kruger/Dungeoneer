@@ -61,7 +61,7 @@ rules:
   no-multi-str: 0
   no-multiple-empty-lines:
   - 0
-  - max: 2
+  - max: 1
   no-native-reassign: 0
   no-negated-in-lhs: 2
   no-nested-ternary: 0
