@@ -4,45 +4,42 @@ appId: "is.simonorn.dungeoneer"
 # Package electron code into a asar archive. Set to false to debug issues.
 asar: false
 
-
 # Windows configuration
 win:
-  icon: "src/build/icon.ico"
-  target:
-    - "nsis"
-  fileAssociations: 
-  - ext: "dungeoneer_map"
-    icon: "file_icon.ico"
-  - ext: "dd2vtt"
-    icon: "file_icon.ico"
+    icon: "src/build/icon.ico"
+    target:
+        - "nsis"
+    fileAssociations:
+        - ext: "dungeoneer_map"
+          icon: "file_icon.ico"
+        - ext: "dd2vtt"
+          icon: "file_icon.ico"
 
 mac:
-  category: "public.app-category.role-playing-games"
-  icon: "src/build/icon.icns"
-  fileAssociations: 
-  - ext: "dungeoneer_map"
-    icon: "file_icon.icns"
-  - ext: "dd2vtt"
-    icon: "file_icon.icns"
-
+    category: "public.app-category.role-playing-games"
+    icon: "src/build/icon.icns"
+    fileAssociations:
+        - ext: "dungeoneer_map"
+          icon: "file_icon.icns"
+        - ext: "dd2vtt"
+          icon: "file_icon.icns"
 
 # Config for the windows installer
 nsis:
-  oneClick: false
-  perMachine: false
-  allowToChangeInstallationDirectory: true
+    oneClick: false
+    perMachine: false
+    allowToChangeInstallationDirectory: true
 
 # Linux configuration
 linux:
-  category: Development
-  target:
-    - "AppImage"
-    - "deb"
-    - "rpm"
+    category: Development
+    target:
+        - "AppImage"
+        - "deb"
+        - "rpm"
 
 electronDownload:
-  cache: "C:/electronbuildercache"
-
+    cache: "C:/electronbuildercache"
 
 publish:
-  provider: github
+    provider: github
